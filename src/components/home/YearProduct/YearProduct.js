@@ -17,8 +17,8 @@ const YearProduct = () => {
             Product of The year
           </h1>
           <p className="text-base font-normal text-primeColor max-w-[600px] mr-4">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat
-            cupiditate modi amet! Facilis, aperiam quaerat.
+          In the fast-paced world we live in, where every second counts, finding the perfect timepiece can be a timeless pursuit.
+           This year, the "Clock of the Year" has been unveiled, capturing the essence of precision, elegance, and innovation in the world of horology.
           </p>
           <ShopNow />
         </div>

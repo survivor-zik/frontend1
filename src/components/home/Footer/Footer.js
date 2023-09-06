@@ -34,12 +34,13 @@ const Footer = () => {
           <FooterListTitle title=" More about Orebi Shop" />
           <div className="flex flex-col gap-6">
             <p className="text-base w-full xl:w-[80%]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim sint
-              ab ullam, numquam nesciunt in.
+            Orebi is one of the world's leading ecommerce brands and is 
+            internationally recognized for celebrating the essence of 
+            classic Worldwide cool looking style.
             </p>
             <ul className="flex items-center gap-2">
               <a
-                href="https://www.youtube.com/@reactjsBD"
+                href="https://www.youtube.com/"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -48,7 +49,7 @@ const Footer = () => {
                 </li>
               </a>
               <a
-                href="https://github.com/noorjsdivs"
+                href="https://github.com/ddhoye"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -57,7 +58,7 @@ const Footer = () => {
                 </li>
               </a>
               <a
-                href="https://www.facebook.com/Noorlalu143/"
+                href="https://www.facebook.com/"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -66,7 +67,7 @@ const Footer = () => {
                 </li>
               </a>
               <a
-                href="https://www.linkedin.com/in/noor-mohammad-ab2245193/"
+                href="https://www.linkedin.com/in/"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -121,7 +122,8 @@ const Footer = () => {
           <FooterListTitle title="Subscribe to our newsletter." />
           <div className="w-full">
             <p className="text-center mb-4">
-              A at pellentesque et mattis porta enim elementum.
+              Subscribe to our newsletter inorder to the first to recieve news 
+              about our amazing deals and offers.
             </p>
             {subscription ? (
               <motion.p
