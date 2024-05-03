@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { logoLight } from "../../assets/images";
-
+import axios from "axios";
 const SignIn = () => {
   // ============= Initial State Start here =============
   const [email, setEmail] = useState("");
@@ -20,27 +20,51 @@ const SignIn = () => {
     setErrEmail("");
   };
   const handlePassword = (e) => {
-    setPassword(e.target.value);
-    setErrPassword("");
-  };
-  // ============= Event Handler End here ===============
-  const handleSignUp = (e) => {
+        setPassword(e.target.value); // Update password state
+        setErrPassword("");
+      };
+  const handleSignUp = async (e) => {
     e.preventDefault();
-
+  
     if (!email) {
       setErrEmail("Enter your email");
+      return; // Add return here to prevent the API call
     }
-
+  
     if (!password) {
       setErrPassword("Create a password");
+      return; // Add return here to prevent the API call
     }
-    // ============== Getting the value ==============
-    if (email && password) {
-      setSuccessMsg(
-        `Hello dear, Thank you for your attempt. We are processing to validate your access. Till then stay connected and additional assistance will be sent to you by your mail at ${email}`
-      );
-      setEmail("");
-      setPassword("");
+  
+    try {
+      const response = await axios.post("https://mathematical-lavinia-survivor.koyeb.app/token", {
+        username: email,
+        password: password,
+      }, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      });
+  
+      // Handle successful sign-in (e.g., get the token, redirect)
+      console.log("Sign in successful:", response);
+  
+      // Clear form fields and errors if needed
+      setErrEmail('');
+      setErrPassword('');
+      setSuccessMsg('Sign in successful. Redirecting to dashboard...');
+      setEmail('');
+      setPassword('');
+  
+    } catch (error) {
+      console.error("Sign in Error:", error);
+      // Handle sign-in error (e.g., display error message)
+      if (error.response && error.response.status === 401) { // Unauthorized
+        setErrEmail('Incorrect email or password');
+      } else {
+        setSuccessMsg(''); // Clear success message 
+        setErrEmail('Error signing in. Please try again later.');
+      }
     }
   };
   return (
@@ -62,7 +86,7 @@ const SignIn = () => {
             </span>
             <p className="text-base text-gray-300">
               <span className="text-white font-semibold font-titleFont">
-                Get started fast with OREBI
+                Get started fast with ZeeNexers
               </span>
               <br />
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab omnis
@@ -75,7 +99,7 @@ const SignIn = () => {
             </span>
             <p className="text-base text-gray-300">
               <span className="text-white font-semibold font-titleFont">
-                Access all OREBI services
+                Access all ZeeNexers services
               </span>
               <br />
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab omnis
@@ -98,7 +122,7 @@ const SignIn = () => {
           <div className="flex items-center justify-between mt-10">
             <Link to="/">
               <p className="text-sm font-titleFont font-semibold text-gray-300 hover:text-white cursor-pointer duration-300">
-                © OREBI
+                © ZeeNexers
               </p>
             </Link>
             <p className="text-sm font-titleFont font-semibold text-gray-300 hover:text-white cursor-pointer duration-300">
@@ -165,7 +189,7 @@ const SignIn = () => {
                     value={password}
                     className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
                     type="password"
-                    placeholder="Create password"
+                    placeholder="enter password"
                   />
                   {errPassword && (
                     <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
