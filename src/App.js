@@ -23,6 +23,7 @@ import Payment from "./pages/payment/Payment";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Shop from "./pages/Shop/Shop";
 import Admin from "./pages/Admin/Admin";
+// import Admin from "./pages/Admin/Admin";
 const Layout = () => {
   return (
     <div>
@@ -52,9 +53,9 @@ const router = createBrowserRouter(
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/paymentgateway" element={<Payment />}></Route>
       </Route>
+      <Route path="/admin" element={<Admin />}></Route>
       <Route path="/signup" element={<SignUp />}></Route>
       <Route path="/signin" element={<SignIn />}></Route>
-      <Route path="/admin" element={<Admin />}></Route>
     </Route>
   )
 );
