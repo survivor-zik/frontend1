@@ -54,16 +54,19 @@ const SignIn = () => {
       // Clear form fields and errors if needed
       setErrEmail('');
       setErrPassword('');
-      setSuccessMsg('Sign in successful. Redirecting to dashboard...');
+      setSuccessMsg('Sign in successful. ...');
       setEmail('');
       setPassword('');
       
-      if (response.status === 200) {
+      if (response.status === 200 && response.data.role==="Admin") {
         setTimeout(() => {
           navigate("/admin");
         }, 1000);
-      } else {
-        setSuccessMsg('');
+      } else if (response.status === 200 && response.data.role==="User") {
+        setSuccessMsg('Welcome');
+        setTimeout(()=>{
+          navigate("/shop");
+        },1000)
         setErrEmail("Unexpected response. Please try again.");
       }
 
@@ -73,7 +76,7 @@ const SignIn = () => {
       if (error.response && error.response.status === 401) { // Unauthorized
         setErrEmail('Incorrect email or password');
       } else {
-        setSuccessMsg(''); // Clear success message 
+        setSuccessMsg('Redirecting to dashboard'); // Clear success message 
         setErrEmail('Error signing in. Please try again later.');
       }
     }
