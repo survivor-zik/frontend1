@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logoLight } from "../../assets/images";
 import axios from "axios";
 const SignIn = () => {
+  const navigate = useNavigate();
   // ============= Initial State Start here =============
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,24 +39,34 @@ const SignIn = () => {
   
     try {
       const response = await axios.post("https://mathematical-lavinia-survivor.koyeb.app/token", {
-        username: email,
+        email: email,
         password: password,
       }, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/json'
         }
       });
   
       // Handle successful sign-in (e.g., get the token, redirect)
       console.log("Sign in successful:", response);
-  
+      
+        
       // Clear form fields and errors if needed
       setErrEmail('');
       setErrPassword('');
       setSuccessMsg('Sign in successful. Redirecting to dashboard...');
       setEmail('');
       setPassword('');
-  
+      
+      if (response.status === 200) {
+        setTimeout(() => {
+          navigate("/admin");
+        }, 1000);
+      } else {
+        setSuccessMsg('');
+        setErrEmail("Unexpected response. Please try again.");
+      }
+
     } catch (error) {
       console.error("Sign in Error:", error);
       // Handle sign-in error (e.g., display error message)
