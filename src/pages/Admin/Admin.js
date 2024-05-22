@@ -1,8 +1,26 @@
+import AdminHeader from "../../components/AdminLayout/AdminHeader";
 import React from "react";
-import Header from "../../components/home/Header/Header";
-import './Admin.css'
-import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill } from 'react-icons/bs';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line,Pie, PieChart, Cell } from 'recharts';
+import "./Admin.css";
+import {
+  BsFillArchiveFill,
+  BsFillGrid3X3GapFill,
+  BsPeopleFill,
+} from "react-icons/bs";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  Pie,
+  PieChart,
+  Cell,
+} from "recharts";
 
 const Admin = () => {
   const customerPurchaseData = [
@@ -34,42 +52,39 @@ const Admin = () => {
     { gender: "Female", count: 115 },
   ];
 
-  const COLORS = ['#0088FE', '#00C49F'];
+  const COLORS = ["#0088FE", "#00C49F"];
 
   return (
     <div className="w-full mx-auto">
-      <Header />
-      <main className='main-container'>
-        <div className='main-title'>
+      <AdminHeader />
+      <main className="main-container">
+        <div className="main-title">
           <h3>DASHBOARD</h3>
         </div>
-
-        <div className='main-cards'>
-          <div className='card'>
-            <div className='card-inner'>
+        <div className="main-cards">
+          <div className="card">
+            <div className="card-inner">
               <h3>Products</h3>
-              <BsFillArchiveFill className='card_icon' />
+              <BsFillArchiveFill className="card_icon" />
             </div>
             <h1>10</h1>
           </div>
-          <div className='card'>
-            <div className='card-inner'>
+          <div className="card">
+            <div className="card-inner">
               <h3>Purchases</h3>
-              <BsFillGrid3X3GapFill className='card_icon' />
+              <BsFillGrid3X3GapFill className="card_icon" />
             </div>
             <h1>380</h1>
           </div>
-          <div className='card'>
-            <div className='card-inner'>
+          <div className="card">
+            <div className="card-inner">
               <h3>Customers</h3>
-              <BsPeopleFill className='card_icon' />
+              <BsPeopleFill className="card_icon" />
             </div>
             <h1>250</h1>
           </div>
-
         </div>
         <div className="charts">
-
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={customerPurchaseData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -89,10 +104,14 @@ const Admin = () => {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="products" stroke="#ffc658" name="Live Products" />
+              <Line
+                type="monotone"
+                dataKey="products"
+                stroke="#ffc658"
+                name="Live Products"
+              />
             </LineChart>
           </ResponsiveContainer>
-
 
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={productCategoryData}>
@@ -118,7 +137,10 @@ const Admin = () => {
                 label
               >
                 {genderDistributionData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
                 ))}
               </Pie>
               <Tooltip />

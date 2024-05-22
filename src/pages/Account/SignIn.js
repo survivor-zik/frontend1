@@ -2,84 +2,23 @@ import React, { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { logoLight } from "../../assets/images";
-import axios from "axios";
+import { handleSignUp } from "./utils";
+import { useDispatch } from "react-redux";
 const SignIn = () => {
   const navigate = useNavigate();
-  // ============= Initial State Start here =============
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // ============= Initial State End here ===============
-  // ============= Error Msg Start here =================
   const [errEmail, setErrEmail] = useState("");
   const [errPassword, setErrPassword] = useState("");
-
-  // ============= Error Msg End here ===================
   const [successMsg, setSuccessMsg] = useState("");
-  // ============= Event Handler Start here =============
   const handleEmail = (e) => {
     setEmail(e.target.value);
     setErrEmail("");
   };
   const handlePassword = (e) => {
-        setPassword(e.target.value); // Update password state
-        setErrPassword("");
-      };
-  const handleSignUp = async (e) => {
-    e.preventDefault();
-  
-    if (!email) {
-      setErrEmail("Enter your email");
-      return; // Add return here to prevent the API call
-    }
-  
-    if (!password) {
-      setErrPassword("Create a password");
-      return; // Add return here to prevent the API call
-    }
-  
-    try {
-      const response = await axios.post("https://mathematical-lavinia-survivor.koyeb.app/token", {
-        email: email,
-        password: password,
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-  
-      // Handle successful sign-in (e.g., get the token, redirect)
-      console.log("Sign in successful:", response);
-      
-        
-      // Clear form fields and errors if needed
-      setErrEmail('');
-      setErrPassword('');
-      setSuccessMsg('Sign in successful. ...');
-      setEmail('');
-      setPassword('');
-      
-      if (response.status === 200 && response.data.role==="Admin") {
-        setTimeout(() => {
-          navigate("/admin");
-        }, 1000);
-      } else if (response.status === 200 && response.data.role==="User") {
-        setSuccessMsg('Welcome');
-        setTimeout(()=>{
-          navigate("/shop");
-        },1000)
-        setErrEmail("Unexpected response. Please try again.");
-      }
-
-    } catch (error) {
-      console.error("Sign in Error:", error);
-      // Handle sign-in error (e.g., display error message)
-      if (error.response && error.response.status === 401) { // Unauthorized
-        setErrEmail('Incorrect email or password');
-      } else {
-        setSuccessMsg('Redirecting to dashboard'); // Clear success message 
-        setErrEmail('Error signing in. Please try again later.');
-      }
-    }
+    setPassword(e.target.value); // Update password state
+    setErrPassword("");
   };
   return (
     <div className="w-full h-screen flex items-center justify-center">
@@ -214,7 +153,20 @@ const SignIn = () => {
                 </div>
 
                 <button
-                  onClick={handleSignUp}
+                  onClick={(e) =>
+                    handleSignUp(
+                      e,
+                      email,
+                      password,
+                      setEmail,
+                      setPassword,
+                      setSuccessMsg,
+                      setErrPassword,
+                      setErrEmail,
+                      dispatch,
+                      navigate
+                    )
+                  }
                   className="bg-primeColor hover:bg-black text-gray-200 hover:text-white cursor-pointer w-full text-base font-medium h-10 rounded-md  duration-300"
                 >
                   Sign In

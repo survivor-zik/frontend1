@@ -41,6 +41,18 @@ export const navBarList = [
     link: "/journal",
   },
 ];
+export const adminNavBarList = [
+  {
+    _id: 2001,
+    title: "Products",
+    link: "/admin/products",
+  },
+  {
+    _id: 2002,
+    title: "Purchases",
+    link: "/admin/purchases",
+  },
+];
 // =================== NavBarList End here ======================
 // =================== Special Offer data Start here ============
 export const SplOfferData = [
