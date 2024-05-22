@@ -1,16 +1,16 @@
 import {
   createBrowserRouter,
   RouterProvider,
-  Outlet,
+  // Outlet,
   createRoutesFromElements,
   Route,
-  ScrollRestoration,
+  // ScrollRestoration,
 } from "react-router-dom";
-import Footer from "./components/home/Footer/Footer";
-import FooterBottom from "./components/home/Footer/FooterBottom";
-import Header from "./components/home/Header/Header";
-import HeaderBottom from "./components/home/Header/HeaderBottom";
-import SpecialCase from "./components/SpecialCase/SpecialCase";
+// import Footer from "./components/home/Footer/Footer";
+// import FooterBottom from "./components/home/Footer/FooterBottom";
+// import Header from "./components/home/Header/Header";
+// import HeaderBottom from "./components/home/Header/HeaderBottom";
+// import SpecialCase from "./components/SpecialCase/SpecialCase";
 import About from "./pages/About/About";
 import SignIn from "./pages/Account/SignIn";
 import SignUp from "./pages/Account/SignUp";
@@ -24,20 +24,21 @@ import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Shop from "./pages/Shop/Shop";
 import Admin from "./pages/Admin/Admin";
 import Products from "./pages/Products";
-// import Admin from "./pages/Admin/Admin";
-const Layout = () => {
-  return (
-    <div>
-      <Header />
-      <HeaderBottom />
-      <SpecialCase />
-      <ScrollRestoration />
-      <Outlet />
-      <Footer />
-      <FooterBottom />
-    </div>
-  );
-};
+// import { useSelector } from "react-redux";
+import ProtectedRoutes from "./utils/ProtectedRoutes";
+// const Layout = () => {
+//   return (
+//     <div>
+//       <Header />
+//       <HeaderBottom />
+//       <SpecialCase />
+//       <ScrollRestoration />
+//       <Outlet />
+//       <Footer />
+//       <FooterBottom />
+//     </div>
+//   );
+// };
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
@@ -48,7 +49,7 @@ const router = createBrowserRouter(
       </Route>
       <Route path="/signup" element={<SignUp />}></Route>
       <Route path="/" element={<SignIn />}></Route>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<ProtectedRoutes />}>
         {/* ==================== Header Navlink Start here =================== */}
         <Route path="/home" element={<Home />}></Route>
         <Route path="/shop" element={<Shop />}></Route>

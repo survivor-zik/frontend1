@@ -12,6 +12,7 @@ export const userSlice = createSlice({
     setToken: (state, action) => {
       state.access_token = action.payload.access_token;
       state.role = action.payload.role;
+      localStorage.setItem("token", state.access_token);
     },
     resetCart: (state) => {
       state.access_token = "";
