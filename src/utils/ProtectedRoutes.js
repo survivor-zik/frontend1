@@ -1,27 +1,23 @@
-import { useSelector } from "react-redux";
-import { Outlet, Navigate, ScrollRestoration } from "react-router-dom";
-import Header from "../components/home/Header/Header";
-import HeaderBottom from "../components/home/Header/HeaderBottom";
-import SpecialCase from "../components/SpecialCase/SpecialCase";
-import Footer from "../components/home/Footer/Footer";
-import FooterBottom from "../components/home/Footer/FooterBottom";
-const Layout = () => {
-  return (
-    <div>
-      <Header />
-      <HeaderBottom />
-      <SpecialCase />
-      <ScrollRestoration />
-      <Outlet />
-      <Footer />
-      <FooterBottom />
-    </div>
-  );
-};
+import { useEffect, useState } from "react";
+import { Navigate, Outlet } from "react-router-dom";
 const ProtectedRoutes = () => {
-  const access_token = localStorage.getItem("token");
-  console.log("this is token", access_token);
-  return access_token ? <Layout /> : <Navigate to="/" />;
+  const [isAdmin, setIsAdmin] = useState(false);
+  useEffect(() => {
+    const access_token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+    console.log("token", access_token);
+    console.log("role", role);
+    if (access_token && role === "Admin") {
+      console.log("IF");
+      setIsAdmin(true);
+    } else {
+      console.log("ELSE");
+      setIsAdmin(false);
+    }
+    console.log(isAdmin);
+  }, [isAdmin]);
+  return <>{!isAdmin && <Outlet />}</>;
+  // return <>{isAdmin ? <Outlet /> : <Navigate to="/signin" />}</>;
 };
 
 export default ProtectedRoutes;
