@@ -132,7 +132,7 @@ export const handleRegister = async (
         console.log("register response", response.data);
         if (response.status === 200) {
           setSuccessMsg(
-            `Hello dear ${clientName}, Welcome you to OREBI Admin panel. We received your Sign up request. We are processing to validate your access. Till then stay connected and additional assistance will be sent to you by your mail at ${email}`
+            `Hello dear ${clientName}, Welcome you to ZeeNexers Admin panel. We received your Sign up request. We are processing to validate your access. Till then stay connected and additional assistance will be sent to you by your mail at ${email}`
           );
         } else {
           setErrEmail("Unable to create user");
