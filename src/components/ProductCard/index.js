@@ -9,28 +9,20 @@ import React from "react";
 }
 const ProductCard = ({ product }) => {
   return (
-    <div className="h-28 w-[99%]">
-      <div className="rounded-lg border border-slate-400 my-2 mx-1 py-2 px-2 flex justify-between w-full">
-        <div className="border border-x-2 rounded-lg flex-col  py-2 px-1.5">
-          <div className="text-2xl font-bold h-[40%]">
-            <p>{product.name}</p>
-          </div>
-          <div className="text-lg font-semibold h-[30%]">
-            <p>{product.description}</p>
-          </div>
-          <div className="flex justify-between h-[30%]">
-            Category:
-            <span className="justify-items-end">{product.categories}</span>
-          </div>
+    <div className="w-full grid grid-cols-5 mb-4 border py-2 items-center">
+      <div className="flex col-span-5 mdl:col-span-2 products-center gap-4 ml-4 items-center">
+        <img className="w-32 h-32" src={product.image} alt="productImage" />
+        <h1 className="font-titleFont font-semibold">{product.name}</h1>
+      </div>
+      <div className="col-span-5 mdl:col-span-3 flex products-center justify-between py-4 mdl:py-0 px-4 mdl:px-0 gap-6 mdl:gap-0">
+        <div className="flex w-1/3 products-center text-lg font-semibold">
+          ${product.price}
         </div>
-        <div className="flex-col border border-x-2 rounded-lg py-2 px-1.5">
-          <p className="flex justify-between">
-            Color:
-            <span className="justify-items-end">{product.colors}</span>
-          </p>
-          <p className="flex justify-between">
-            Price: $<span className="justify-items-end">{product.price}</span>
-          </p>
+        <div className="w-1/3 flex products-center gap-6 text-lg">
+          <p>{product.categories}</p>
+        </div>
+        <div className="w-1/3 flex products-center font-titleFont font-bold text-lg">
+          <p>{product.description}</p>
         </div>
       </div>
     </div>
