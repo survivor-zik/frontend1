@@ -1,17 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { base64Decode } from "../../utils";
 
-{
-  /* <p>{product.name}</p>
-<p>{product.id}</p>
-<p>{product.categories}</p>
-<p>{product.colors}</p>
-<p>{product.description}</p> */
-}
 const ProductCard = ({ product }) => {
+  const [pic, setPic] = useState();
+  useEffect(() => {
+    setPic(base64Decode(product.image));
+  }, [pic, product.image]);
   return (
     <div className="w-full grid grid-cols-5 mb-4 border py-2 items-center">
       <div className="flex col-span-5 mdl:col-span-2 products-center gap-4 ml-4 items-center">
-        <img className="w-32 h-32" src={product.image} alt="productImage" />
+        <img className="w-32 h-32" src={pic} alt="productImage" />
         <h1 className="font-titleFont font-semibold">{product.name}</h1>
       </div>
       <div className="col-span-5 mdl:col-span-3 flex products-center justify-between py-4 mdl:py-0 px-4 mdl:px-0 gap-6 mdl:gap-0">
