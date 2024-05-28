@@ -2,51 +2,59 @@ import React, { useEffect, useState } from "react";
 import AdminHeader from "../../components/AdminLayout/AdminHeader";
 import { getPurchases } from "./utils";
 import PurchaseCard from "../../components/PurchaseCard";
-import { dateFormatter } from "../../utils";
 
 const Purchases = () => {
-  const [purchases, setPurchases] = useState([]);
+  const [userPurchases, setUserPurchases] = useState([]);
   const [loading, setLoading] = useState(true);
   const access_token = localStorage.getItem("token");
   useEffect(() => {
     console.log("token purchase", access_token);
-    getPurchases(access_token, setPurchases, setLoading);
-  }, [access_token]);
+    getPurchases(access_token, setUserPurchases, setLoading);
+  }, []);
   return (
     <div className="w-full pb-20">
       <AdminHeader />
-      <div className="w-full h-20 bg-[#F5F7F7] text-primeColor hidden lgl:grid grid-cols-5 place-content-center px-6 text-lg font-titleFont font-semibold">
-        <h2 className="col-span-2">Product</h2>
+      <div className="w-full h-20 bg-[#F5F7F7] text-primeColor hidden lgl:grid grid-cols-6 place-content-center px-6 text-lg font-titleFont font-semibold">
+        <h2 className="col-span-2">Products</h2>
         <h2>Price</h2>
-        <h2>Category</h2>
-        <h2>Description</h2>
+        <h2>Quantity</h2>
+        <h2>Total Price</h2>
+        <h2>Status</h2>
       </div>
       <div className="mt-5">
         {loading ? (
           <h1>Loading...</h1>
         ) : (
-          purchases.map((purchase, index) => (
+          userPurchases.map((userPurchase, index) => (
             <div key={index}>
               <div className="w-full font-titleFont font-medium pb-5 px-5">
                 <p>
                   Purchase by:{" "}
-                  <span className="font-semibold pl-2">{purchase.user_id}</span>
+                  <span className="font-semibold pl-2">
+                    {userPurchase.user_id}
+                  </span>
                 </p>
-                <p>
+                {/* <p>
                   Purchase Date:
                   <span className="font-semibold pl-2">
-                    {dateFormatter(purchase.purchase_date)}
+                    {dateFormatter(userPurchase.purchase_date)}
                   </span>
                 </p>
                 <p>
-                  Purchase Sub-Total $ :
+                  Purchase Sub-Total: $
                   <span className="font-semibold pl-2">
-                    {purchase.total_price}
+                    {userPurchase.total_price}
                   </span>
                 </p>
+                <p>
+                  Delivery Status:
+                  <span className="font-semibold pl-2">
+                    {userPurchase.status}
+                  </span>
+                </p> */}
               </div>
-              {purchase.items.map((item) => (
-                <PurchaseCard purchase={item} quantity={item.quantity} />
+              {userPurchase.purchases.map((purchase) => (
+                <PurchaseCard purchase={purchase} />
               ))}
             </div>
           ))
