@@ -1,7 +1,8 @@
 import axios from "axios";
 import { Bounce, toast } from "react-toastify";
 
-export const handleDelete = (id) => {
+export const handleDelete = (id, setDeleting) => {
+  setDeleting(true);
   const token = localStorage.getItem("token");
   axios
     .delete(`https://mathematical-lavinia-survivor.koyeb.app/products/${id}`, {
@@ -21,5 +22,11 @@ export const handleDelete = (id) => {
       toast.error("Error while deleting Product", {
         transition: Bounce,
       });
+    })
+    .finally(() => {
+      setDeleting(false);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2500);
     });
 };

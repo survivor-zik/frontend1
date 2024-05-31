@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import * as yup from "yup";
 import { uploadProduct } from "./utils";
-import { useSelector } from "react-redux";
 
 const customStyles = {
   content: {
@@ -20,6 +19,7 @@ const ModalComponent = ({ modalIsOpen, closeModal }) => {
   const [pic, setPic] = useState("");
   const token = localStorage.getItem("token");
   const [error, setError] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const initialValues = {
     name: "",
     price: "",
@@ -40,7 +40,7 @@ const ModalComponent = ({ modalIsOpen, closeModal }) => {
   const onSubmit = (values) => {
     console.log("VALUES ADD-PRODUCT", values);
     if (pic) {
-      uploadProduct(values, pic, token);
+      uploadProduct(values, pic, token, closeModal, setUploading);
     } else {
       setError(true);
     }
@@ -172,8 +172,9 @@ const ModalComponent = ({ modalIsOpen, closeModal }) => {
               <button
                 className="p-2 border border-1 border-black text-lg rounded-lg bg-primeColor text-white font-semibold"
                 type="submit"
+                disabled={uploading}
               >
-                Add Product
+                {uploading ? "Uploading..." : "  Add Product"}
               </button>
             </div>
           </Form>

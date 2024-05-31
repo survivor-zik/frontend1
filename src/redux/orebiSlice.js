@@ -3,6 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   userInfo: [],
   products: [],
+  role: "",
+  access_token: "",
+  name: "",
+  email: "",
 };
 
 export const orebiSlice = createSlice({
@@ -45,6 +49,22 @@ export const orebiSlice = createSlice({
     resetCart: (state) => {
       state.products = [];
     },
+    setToken: (state, action) => {
+      state.access_token = action.payload.access_token;
+      state.role = action.payload.role;
+      localStorage.setItem("token", state.access_token);
+      localStorage.setItem("role", state.role);
+      console.log("redux", state.access_token);
+    },
+    setUserData: (state, action) => {
+      state.email = action.payload.email;
+      state.name = action.payload.full_name;
+      console.log("user data", state.name, state.email);
+    },
+    resetData: (state) => {
+      state.access_token = "";
+      state.userEmail = "";
+    },
   },
 });
 
@@ -54,5 +74,8 @@ export const {
   drecreaseQuantity,
   deleteItem,
   resetCart,
+  setToken,
+  setUserData,
+  resetData,
 } = orebiSlice.actions;
 export default orebiSlice.reducer;

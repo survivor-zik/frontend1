@@ -1,6 +1,8 @@
 import axios from "axios";
-import { setToken } from "../../redux/userSlice";
+// import { setToken, setUserData } from "../../redux/userSlice";
 import { EmailValidation } from "../../constants/validations";
+import { data } from "autoprefixer";
+import { setToken, setUserData } from "../../redux/orebiSlice";
 
 export const handleSignUp = async (
   e,
@@ -25,6 +27,7 @@ export const handleSignUp = async (
     setErrPassword("Enter your password");
     return;
   }
+  console.log("data", email, password);
   try {
     const data = new URLSearchParams();
     data.append("username", email);
@@ -55,6 +58,7 @@ export const handleSignUp = async (
           navigate("/shop");
         }, 1000);
       }
+      userData(email, dispatch);
     } else {
       setErrEmail("Incorrect email or password");
     }
@@ -143,4 +147,25 @@ export const handleRegister = async (
       }
     }
   }
+};
+const userData = (email, dispatch) => {
+  axios
+    .get(
+      `https://mathematical-lavinia-survivor.koyeb.app/users/${encodeURIComponent(
+        email
+      )}`,
+      {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    )
+    .then((response) => {
+      console.log("user details", response.data);
+      dispatch(setUserData(response.data));
+    })
+    .catch((err) => {
+      console.log("Error while getting user details", err);
+    });
 };
