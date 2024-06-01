@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { handleDelete } from "./utils";
+import EditModal from "../EditModal";
 
 const ProductCard = ({ product }) => {
   const [deleting, setDeleting] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   return (
     <div className="w-full grid grid-cols-6 mb-4 border py-2 items-center">
       <div className="flex col-span-5 mdl:col-span-2 products-center gap-4 ml-4 items-center">
@@ -29,6 +31,7 @@ const ProductCard = ({ product }) => {
           <div className="flex flex-col justify-start w-[50%]">
             <button
               className="px-2 py-3 mb-2 rounded-lg bg-primeColor text-white"
+              onClick={() => setOpenModal(true)}
               disabled={deleting}
             >
               Edit
@@ -43,6 +46,11 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
       </div>
+      <EditModal
+        modalIsOpen={openModal}
+        closeModal={setOpenModal}
+        productDetails={product}
+      />
     </div>
   );
 };
