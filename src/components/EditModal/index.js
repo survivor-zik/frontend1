@@ -24,12 +24,13 @@ const EditModal = ({ modalIsOpen, closeModal, productDetails }) => {
   const [error, setError] = useState(false);
   const [updating, setUpdating] = useState(false);
   const fileInputRef = useRef(null);
+  console.log("daft", productDetails);
   const initialValues = {
     name: productDetails.name,
     price: productDetails.price,
     description: productDetails.description,
     category: productDetails.categories,
-    color: productDetails.colors || "Blue",
+    color: productDetails.colors,
   };
   const productSchema = yup.object().shape({
     name: yup.string(),
@@ -45,10 +46,10 @@ const EditModal = ({ modalIsOpen, closeModal, productDetails }) => {
       updatedValues.price = values.price;
     if (values.description !== productDetails.description)
       updatedValues.description = values.description;
-    if (values.category !== productDetails.category)
-      updatedValues.category = values.category;
-    if (values.color !== productDetails.color)
-      updatedValues.color = values.color;
+    if (values.category !== productDetails.categories)
+      updatedValues.categories = values.category;
+    if (values.color !== productDetails.colors)
+      updatedValues.colors = values.color;
     if (pic || preview) {
       editProduct(
         productDetails.iden,

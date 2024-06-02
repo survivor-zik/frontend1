@@ -13,7 +13,6 @@ export const getPurchases = async (token, setPurchases, setLoading) => {
       console.log("getPurchases Response", response.data);
       setLoading(false);
       if (response.status === 200) {
-        console.log(refactorPurchases(response.data));
         setPurchases(refactorPurchases(response.data));
       } else {
         setPurchases([]);
@@ -28,6 +27,7 @@ export const getPurchases = async (token, setPurchases, setLoading) => {
 export const refactorPurchases = (data) => {
   const combinedData = data.reduce((acc, current) => {
     const {
+      _id,
       user_id,
       items,
       total_price,
@@ -43,6 +43,7 @@ export const refactorPurchases = (data) => {
 
     items.forEach((item) => {
       acc[user_id].push({
+        _id,
         ...item,
         total_price,
         purchase_date,

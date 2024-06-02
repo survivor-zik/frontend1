@@ -8,18 +8,18 @@ const Purchases = () => {
   const [loading, setLoading] = useState(true);
   const access_token = localStorage.getItem("token");
   useEffect(() => {
-    console.log("token purchase", access_token);
     getPurchases(access_token, setUserPurchases, setLoading);
   }, []);
   return (
     <div className="w-full pb-20">
       <AdminHeader />
-      <div className="w-full h-20 bg-[#F5F7F7] text-primeColor hidden lgl:grid grid-cols-6 place-content-center px-6 text-lg font-titleFont font-semibold">
+      <div className="w-full h-20 bg-[#F5F7F7] text-primeColor hidden lgl:grid grid-cols-7 place-content-center px-6 text-lg font-titleFont font-semibold">
         <h2 className="col-span-2">Products</h2>
         <h2>Price</h2>
         <h2>Quantity</h2>
         <h2>Total Price</h2>
         <h2>Status</h2>
+        <h2>Edit / Delete</h2>
       </div>
       <div className="mt-5">
         {loading ? (
@@ -54,7 +54,7 @@ const Purchases = () => {
                 </p> */}
               </div>
               {userPurchase.purchases.map((purchase) => (
-                <PurchaseCard purchase={purchase} />
+                <PurchaseCard purchase={purchase} key={purchase.product_id} />
               ))}
             </div>
           ))

@@ -9,31 +9,32 @@ export const editProduct = (
   closeModal,
   setUploading
 ) => {
-  let formData;
+  let formData = {};
+  let headers = {
+    accept: "application/json",
+    Authorization: `Bearer ${token}`,
+  };
   setUploading(true);
   const params = new URLSearchParams();
   if (values.name) params.append("name", values.name);
   if (values.price) params.append("price", values.price);
   if (values.description) params.append("description", values.description);
-  if (values.color) params.append("colors", values.color);
-  if (values.category) params.append("categories", values.category);
+  if (values.colors) params.append("colors", values.colors);
+  if (values.categories) params.append("categories", values.categories);
   const url = `https://mathematical-lavinia-survivor.koyeb.app/products/${id}?${params.toString()}`;
   console.log("url", url);
   if (pic) {
     formData = new FormData();
     formData.append("image", pic);
-  } else {
-    formData = {};
+    headers = {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    };
   }
-
   console.log("this is token", token);
   axios
     .put(url, formData, {
-      headers: {
-        accept: "application/json",
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: headers,
     })
     .then((response) => {
       console.log("response", response.data);
