@@ -8,8 +8,6 @@ import {
 } from "react-router-dom";
 import Footer from "./components/home/Footer/Footer";
 import FooterBottom from "./components/home/Footer/FooterBottom";
-import Header from "./components/home/Header/Header";
-import HeaderBottom from "./components/home/Header/HeaderBottom";
 import SpecialCase from "./components/SpecialCase/SpecialCase";
 import About from "./pages/About/About";
 import SignIn from "./pages/Account/SignIn";
@@ -40,15 +38,13 @@ const Layout = () => {
     </div>
   );
 };
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/signup" element={<SignUp />}></Route>
       <Route path="/signin" element={<SignIn />}></Route>
-      <Route
-        path="/admin"
-        // element={<ProtectedRoutes />}
-      >
+      <Route path="/admin" element={<ProtectedRoutes />}>
         <Route path="/admin/" element={<Admin />}></Route>
         <Route path="/admin/products" element={<Products />}></Route>
         <Route path="/admin/purchases" element={<Purchases />}></Route>
