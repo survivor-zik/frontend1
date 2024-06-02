@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { deletePurchase, fetchItemDetails } from "./utils";
 import { useEffect } from "react";
 import { dateFormatter } from "../../utils";
+import EditPurchaseModal from "../EditPurchaseModal";
 
 const PurchaseCard = ({ purchase }) => {
   const [itemData, setItemData] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const token = localStorage.getItem("token");
   useEffect(() => {
@@ -38,7 +40,7 @@ const PurchaseCard = ({ purchase }) => {
             <div className="flex flex-col justify-start">
               <button
                 className="px-2 py-3 mb-2 rounded-lg bg-primeColor text-white"
-                // onClick={() => setOpenModal(true)}
+                onClick={() => setShowModal(true)}
                 disabled={deleting}
               >
                 Edit
@@ -62,6 +64,11 @@ const PurchaseCard = ({ purchase }) => {
           </span>
         </p>
       </div>
+      <EditPurchaseModal
+        closeModal={setShowModal}
+        modalIsOpen={showModal}
+        purchase={purchase}
+      />
     </div>
   );
 };
