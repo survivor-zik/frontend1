@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import Footer from "./components/home/Footer/Footer";
 import FooterBottom from "./components/home/Footer/FooterBottom";
-import SpecialCase from "./components/SpecialCase/SpecialCase";
 import About from "./pages/About/About";
 import SignIn from "./pages/Account/SignIn";
 import SignUp from "./pages/Account/SignUp";
@@ -27,10 +26,7 @@ import NavBar from "./components/home/Header/Navbar";
 const Layout = () => {
   return (
     <div>
-      {/* <Header /> */}
-      {/* <HeaderBottom /> */}
       <NavBar />
-      <SpecialCase />
       <ScrollRestoration />
       <Outlet />
       <Footer />
