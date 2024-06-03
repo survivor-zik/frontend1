@@ -7,6 +7,7 @@ const initialState = {
   access_token: "",
   name: "",
   email: "",
+  items: [],
 };
 
 export const orebiSlice = createSlice({
@@ -59,6 +60,9 @@ export const orebiSlice = createSlice({
       state.email = action.payload.email;
       state.name = action.payload.full_name;
     },
+    setItems: (state, action) => {
+      state.items = action.payload;
+    },
     resetData: (state) => {
       return initialState;
     },
@@ -74,5 +78,6 @@ export const {
   setToken,
   setUserData,
   resetData,
+  setItems,
 } = orebiSlice.actions;
 export default orebiSlice.reducer;

@@ -2,19 +2,22 @@ import { FaShoppingCart } from "react-icons/fa";
 import { MdAccountCircle } from "react-icons/md";
 import { SlLogout } from "react-icons/sl";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Search from "./Search";
 import { logo } from "../../../assets/images";
 import Image from "../../designLayouts/Image";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
+import { resetData } from "../../../redux/orebiSlice";
 
 const NavBar = () => {
   const cart = useSelector((state) => state.orebiReducer.products);
   const name = useSelector((state) => state.orebiReducer.name);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
+    dispatch(resetData());
     localStorage.clear();
     navigate("/signin");
   };

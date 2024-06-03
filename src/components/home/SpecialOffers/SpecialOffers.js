@@ -1,53 +1,49 @@
 import React from "react";
 import Heading from "../Products/Heading";
 import Product from "../Products/Product";
-import {
-  spfOne,
-  spfTwo,
-  spfThree,
-  spfFour,
-} from "../../../assets/images/index";
+import { useSelector } from "react-redux";
 
 const SpecialOffers = () => {
+  const { items } = useSelector((state) => state.orebiReducer);
   return (
     <div className="w-full pb-20">
       <Heading heading="Special Offers" />
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lgl:grid-cols-3 xl:grid-cols-4 gap-10">
         <Product
-          _id="1101"
-          img={spfOne}
-          productName="Cap for Boys"
-          price="35.00"
-          color="Blank and White"
+          _id={items[2].iden}
+          img={`https://mathematical-lavinia-survivor.koyeb.app/products/image/${items[2].iden}`}
+          productName={items[2].name}
+          price={items[2].price}
+          // color={item.colors}
           badge={true}
-          des="Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic excepturi quibusdam odio deleniti reprehenderit facilis."
+          des={items[2].description}
         />
         <Product
-          _id="1102"
-          img={spfTwo}
-          productName="Tea Table"
-          price="180.00"
-          color="Gray"
+          _id={items[3].iden}
+          img={`https://mathematical-lavinia-survivor.koyeb.app/products/image/${items[3].iden}`}
+          productName={items[3].name}
+          price={items[3].price}
+          // color={item.colors}
           badge={true}
-          des="Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic excepturi quibusdam odio deleniti reprehenderit facilis."
+          des={items[3].description}
         />
         <Product
-          _id="1103"
-          img={spfThree}
-          productName="Headphones"
-          price="25.00"
-          color="Mixed"
-          badge={true}
-          des="Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic excepturi quibusdam odio deleniti reprehenderit facilis."
+          _id={items[5].iden}
+          img={`https://mathematical-lavinia-survivor.koyeb.app/products/image/${items[5].iden}`}
+          productName={items[5].name}
+          price={items[5].price}
+          // color={item.colors}
+          badge={false}
+          des={items[5].description}
         />
         <Product
-          _id="1104"
-          img={spfFour}
-          productName="Sun glasses"
-          price="220.00"
-          color="Black"
+          _id={items[6].iden}
+          img={`https://mathematical-lavinia-survivor.koyeb.app/products/image/${items[6].iden}`}
+          productName={items[6].name}
+          price={items[6].price}
+          // color={item.colors}
           badge={true}
-          des="Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic excepturi quibusdam odio deleniti reprehenderit facilis."
+          des={items[6].description}
         />
       </div>
     </div>

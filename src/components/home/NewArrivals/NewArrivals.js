@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import Heading from "../Products/Heading";
 import Product from "../Products/Product";
-import {
-  newArrOne,
-  newArrTwo,
-  newArrThree,
-  newArrFour,
-} from "../../../assets/images/index";
 import SampleNextArrow from "./SampleNextArrow";
 import SamplePrevArrow from "./SamplePrevArrow";
+import { useSelector } from "react-redux";
 
 const NewArrivals = () => {
+  const { items } = useSelector((state) => state.orebiReducer);
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    if (items.length > 0) {
+      setProducts(items);
+    } else {
+      setProducts([]);
+    }
+  }, [items]);
   const settings = {
     infinite: true,
     speed: 500,
@@ -50,18 +54,20 @@ const NewArrivals = () => {
     <div className="w-full pb-16">
       <Heading heading="New Arrivals" />
       <Slider {...settings}>
-        <div className="px-2">
-          <Product
-            _id="100001"
-            img={newArrOne}
-            productName="Round Table Clock"
-            price="44.00"
-            color="Black"
-            badge={true}
-            des="Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic excepturi quibusdam odio deleniti reprehenderit facilis."
-          />
-        </div>
-        <div className="px-2">
+        {products.map((item) => (
+          <div className="px-2" key={item.iden}>
+            <Product
+              _id={item.iden}
+              img={`https://mathematical-lavinia-survivor.koyeb.app/products/image/${item.iden}`}
+              productName={item.name}
+              price={item.price}
+              // color={item.colors}
+              badge={true}
+              des={item.description}
+            />
+          </div>
+        ))}
+        {/* <div className="px-2">
           <Product
             _id="100002"
             img={newArrTwo}
@@ -104,7 +110,7 @@ const NewArrivals = () => {
             badge={false}
             des="Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic excepturi quibusdam odio deleniti reprehenderit facilis."
           />
-        </div>
+        </div> */}
       </Slider>
     </div>
   );
