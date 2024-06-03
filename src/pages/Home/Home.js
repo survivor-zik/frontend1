@@ -10,10 +10,6 @@ import { useDispatch } from "react-redux";
 import { fetchProducts } from "./utils";
 
 const Home = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    fetchProducts(dispatch);
-  }, []);
   return (
     <div className="w-full mx-auto">
       <Banner />
