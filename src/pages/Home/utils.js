@@ -9,12 +9,9 @@ export const fetchProducts = (dispatch) => {
       },
     })
     .then((response) => {
-      console.log("fetchProducts -- ", response.data);
-      console.log("USEF", response.data);
       dispatch(setItems(response.data));
     })
     .catch((err) => {
-      console.log("fetchProducts Error -- ", err);
       dispatch(setItems([]));
     });
 };

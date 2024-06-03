@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 const BestSellers = () => {
   const { items } = useSelector((state) => state.orebiReducer);
-  console.log("2", items[2]);
   return (
     <div className="w-full pb-20">
       <Heading heading="Our Bestsellers" />
