@@ -11,6 +11,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     setProductInfo(location.state.item);
+    console.log("effect", location.state);
     setPrevLocation(location.pathname);
   }, [location, productInfo]);
 
