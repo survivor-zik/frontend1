@@ -11,7 +11,7 @@ import { Bounce, toast } from "react-toastify";
 const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { products, token, name, email } = useSelector(
+  const { products, access_token, name, email } = useSelector(
     (state) => state.orebiReducer
   );
   const [totalAmt, setTotalAmt] = useState("");
@@ -34,7 +34,7 @@ const Cart = () => {
     }
   }, [totalAmt]);
   const handleCheckout = () => {
-    if (!token || !name || !email) {
+    if (!access_token || !name || !email) {
       navigate("/signin");
       toast.error("Please login first to confirm your order", {
         transition: Bounce,

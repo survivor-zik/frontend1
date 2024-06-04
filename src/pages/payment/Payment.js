@@ -8,7 +8,7 @@ import { Bounce, toast } from "react-toastify";
 const Payment = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { products, name, token, email } = useSelector(
+  const { products, name, access_token, email } = useSelector(
     (state) => state.orebiReducer
   );
   const [totalAmt, setTotalAmt] = useState("");
@@ -17,7 +17,10 @@ const Payment = () => {
   const [contact, setContact] = useState("");
   const [err, setErr] = useState("");
   useEffect(() => {
-    if (!token || !name || !email) {
+    console.log(access_token);
+    console.log(name);
+    console.log(email);
+    if (!access_token || !name || !email) {
       navigate("/signin");
       toast.error("Please login first to continue order", {
         transition: Bounce,
@@ -25,7 +28,7 @@ const Payment = () => {
     } else {
       navigate("/paymentgateway");
     }
-  }, [email, name, navigate, token]);
+  }, [email, name, navigate, access_token]);
   useEffect(() => {
     let price = 0;
     products.map((item) => {
