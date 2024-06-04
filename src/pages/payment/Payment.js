@@ -3,16 +3,29 @@ import { Link, useNavigate } from "react-router-dom";
 import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadPurchase } from "./utils";
+import { Bounce, toast } from "react-toastify";
 
 const Payment = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { products, name } = useSelector((state) => state.orebiReducer);
+  const { products, name, token, email } = useSelector(
+    (state) => state.orebiReducer
+  );
   const [totalAmt, setTotalAmt] = useState("");
   const [shippingCharge, setShippingCharge] = useState("");
   const [address, setAddress] = useState("");
   const [contact, setContact] = useState("");
   const [err, setErr] = useState("");
+  useEffect(() => {
+    if (!token || !name || !email) {
+      navigate("/signin");
+      toast.error("Please login first to continue order", {
+        transition: Bounce,
+      });
+    } else {
+      navigate("/paymentgateway");
+    }
+  }, [email, name, navigate, token]);
   useEffect(() => {
     let price = 0;
     products.map((item) => {

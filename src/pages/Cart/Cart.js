@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
 import { resetCart } from "../../redux/orebiSlice";
 import { emptyCart } from "../../assets/images/index";
 import ItemCard from "./ItemCard";
+import { Bounce, toast } from "react-toastify";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.orebiReducer.products);
+  const navigate = useNavigate();
+  const { products, token, name, email } = useSelector(
+    (state) => state.orebiReducer
+  );
   const [totalAmt, setTotalAmt] = useState("");
   const [shippingCharge, setShippingCharge] = useState("");
   useEffect(() => {
@@ -29,6 +33,16 @@ const Cart = () => {
       setShippingCharge(20);
     }
   }, [totalAmt]);
+  const handleCheckout = () => {
+    if (!token || !name || !email) {
+      navigate("/signin");
+      toast.error("Please login first to confirm your order", {
+        transition: Bounce,
+      });
+    } else {
+      navigate("/paymentgateway");
+    }
+  };
   return (
     <div className="max-w-container mx-auto px-4">
       <Breadcrumbs title="Cart" />
@@ -92,11 +106,12 @@ const Cart = () => {
                 </p>
               </div>
               <div className="flex justify-end">
-                <Link to="/paymentgateway">
-                  <button className="w-52 h-10 bg-primeColor text-white hover:bg-black duration-300">
-                    Proceed to Checkout
-                  </button>
-                </Link>
+                <button
+                  className="w-52 h-10 bg-primeColor text-white hover:bg-black duration-300"
+                  onClick={handleCheckout}
+                >
+                  Proceed to Checkout
+                </button>
               </div>
             </div>
           </div>
