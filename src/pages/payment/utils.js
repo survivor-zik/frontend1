@@ -41,7 +41,6 @@ export const uploadPurchase = (
     .then((response) => {
       console.log("purchase-added response", response.data);
       dispatch(resetCart());
-      localStorage.clear();
       toast.success("Order Placed", {
         transition: Bounce,
       });
