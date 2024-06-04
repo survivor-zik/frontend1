@@ -1,21 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Slider from "react-slick";
 import Heading from "../Products/Heading";
 import Product from "../Products/Product";
 import SampleNextArrow from "./SampleNextArrow";
 import SamplePrevArrow from "./SamplePrevArrow";
-import { useSelector } from "react-redux";
 
-const NewArrivals = () => {
-  const { items } = useSelector((state) => state.orebiReducer);
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    if (items.length > 0) {
-      setProducts(items);
-    } else {
-      setProducts([]);
-    }
-  }, [items]);
+const NewArrivals = ({ items }) => {
   const settings = {
     infinite: true,
     speed: 500,
@@ -54,7 +44,7 @@ const NewArrivals = () => {
     <div className="w-full pb-16">
       <Heading heading="New Arrivals" />
       <Slider {...settings}>
-        {products.map((item) => (
+        {items.map((item) => (
           <div className="px-2" key={item.iden}>
             <Product
               _id={item.iden}

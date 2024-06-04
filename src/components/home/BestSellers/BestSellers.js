@@ -1,10 +1,8 @@
 import React from "react";
 import Heading from "../Products/Heading";
 import Product from "../Products/Product";
-import { useSelector } from "react-redux";
 
-const BestSellers = () => {
-  const { items } = useSelector((state) => state.orebiReducer);
+const BestSellers = ({ items }) => {
   return (
     <div className="w-full pb-20">
       <Heading heading="Our Bestsellers" />

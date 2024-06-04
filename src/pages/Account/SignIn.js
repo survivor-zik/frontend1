@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import { logo, logoLight } from "../../assets/images";
+import { logo } from "../../assets/images";
 import { handleSignUp } from "./utils";
 import { useDispatch } from "react-redux";
 import Image from "../../components/designLayouts/Image";

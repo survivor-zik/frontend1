@@ -6,7 +6,6 @@ import {
   Route,
   ScrollRestoration,
 } from "react-router-dom";
-import axios from "axios";
 import Footer from "./components/home/Footer/Footer";
 import FooterBottom from "./components/home/Footer/FooterBottom";
 import About from "./pages/About/About";
@@ -24,9 +23,6 @@ import Products from "./pages/Products";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import Purchases from "./pages/Purchases";
 import NavBar from "./components/home/Header/Navbar";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setItems } from "./redux/orebiSlice";
 const Layout = () => {
   return (
     <div>
@@ -64,24 +60,6 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const fetchProducts = async (dispatch) => {
-      await axios
-        .get("https://mathematical-lavinia-survivor.koyeb.app/products/", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((response) => {
-          dispatch(setItems(response.data));
-        })
-        .catch((err) => {
-          dispatch(setItems([]));
-        });
-    };
-    fetchProducts(dispatch);
-  }, [dispatch]);
   return (
     <div className="font-bodyFont">
       <RouterProvider router={router} />

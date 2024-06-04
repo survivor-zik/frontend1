@@ -1,10 +1,8 @@
 import React from "react";
 import Heading from "../Products/Heading";
 import Product from "../Products/Product";
-import { useSelector } from "react-redux";
 
-const SpecialOffers = () => {
-  const { items } = useSelector((state) => state.orebiReducer);
+const SpecialOffers = ({ items }) => {
   return (
     <div className="w-full pb-20">
       <Heading heading="Special Offers" />
