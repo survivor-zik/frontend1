@@ -1,5 +1,5 @@
 import AdminHeader from "../../components/AdminLayout/AdminHeader";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Admin.css";
 import {
   BsFillArchiveFill,
@@ -21,8 +21,17 @@ import {
   PieChart,
   Cell,
 } from "recharts";
+import { fetchData } from "./utils";
+import { InfinitySpin } from "react-loader-spinner";
 
 const Admin = () => {
+  const [totalProducts, setTotalProducts] = useState("0");
+  const [totalUsers, setTotalUsers] = useState("0");
+  const [totalPurchases, setTotalPurchases] = useState("0");
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    fetchData(setTotalProducts, setTotalUsers, setTotalPurchases, setLoading);
+  }, []);
   const customerPurchaseData = [
     { date: "2024-01-01", customers: 150, purchases: 220 },
     { date: "2024-02-01", customers: 180, purchases: 280 },
@@ -56,98 +65,111 @@ const Admin = () => {
 
   return (
     <div className="w-full mx-auto">
-      <AdminHeader />
-      <main className="main-container">
-        <div className="main-title">
-          <h3>DASHBOARD</h3>
+      {loading ? (
+        <div className="w-screen h-screen justify-center items-center">
+          <InfinitySpin
+            visible={loading}
+            width="600"
+            color="#4fa94d"
+            ariaLabel="infinity-spin-loading"
+          />
         </div>
-        <div className="main-cards">
-          <div className="card">
-            <div className="card-inner">
-              <h3>Products</h3>
-              <BsFillArchiveFill className="card_icon" />
+      ) : (
+        <>
+          <AdminHeader />
+          <main className="main-container">
+            <div className="main-title">
+              <h3>DASHBOARD</h3>
             </div>
-            <h1>10</h1>
-          </div>
-          <div className="card">
-            <div className="card-inner">
-              <h3>Purchases</h3>
-              <BsFillGrid3X3GapFill className="card_icon" />
+            <div className="main-cards">
+              <div className="card">
+                <div className="card-inner">
+                  <h3>Products</h3>
+                  <BsFillArchiveFill className="card_icon" />
+                </div>
+                <h1>{totalProducts}</h1>
+              </div>
+              <div className="card">
+                <div className="card-inner">
+                  <h3>Purchases</h3>
+                  <BsFillGrid3X3GapFill className="card_icon" />
+                </div>
+                <h1>{totalPurchases}</h1>
+              </div>
+              <div className="card">
+                <div className="card-inner">
+                  <h3>Customers</h3>
+                  <BsPeopleFill className="card_icon" />
+                </div>
+                <h1>{totalUsers}</h1>
+              </div>
             </div>
-            <h1>380</h1>
-          </div>
-          <div className="card">
-            <div className="card-inner">
-              <h3>Customers</h3>
-              <BsPeopleFill className="card_icon" />
-            </div>
-            <h1>250</h1>
-          </div>
-        </div>
-        <div className="charts">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={customerPurchaseData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="customers" fill="#8884d8" name="Customers" />
-              <Bar dataKey="purchases" fill="#82ca9d" name="Purchases" />
-            </BarChart>
-          </ResponsiveContainer>
+            <div className="charts">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={customerPurchaseData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="date" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="customers" fill="#8884d8" name="Customers" />
+                  <Bar dataKey="purchases" fill="#82ca9d" name="Purchases" />
+                </BarChart>
+              </ResponsiveContainer>
 
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={liveProductData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="products"
-                stroke="#ffc658"
-                name="Live Products"
-              />
-            </LineChart>
-          </ResponsiveContainer>
-
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={productCategoryData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="category" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="quantity" fill="#3498db" />
-            </BarChart>
-          </ResponsiveContainer>
-
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={genderDistributionData}
-                dataKey="count"
-                nameKey="gender"
-                cx="50%"
-                cy="50%"
-                outerRadius={80}
-                fill="#8884d8"
-                label
-              >
-                {genderDistributionData.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={liveProductData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="date" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="products"
+                    stroke="#ffc658"
+                    name="Live Products"
                   />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
-      </main>
+                </LineChart>
+              </ResponsiveContainer>
+
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={productCategoryData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="category" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="quantity" fill="#3498db" />
+                </BarChart>
+              </ResponsiveContainer>
+
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={genderDistributionData}
+                    dataKey="count"
+                    nameKey="gender"
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={80}
+                    fill="#8884d8"
+                    label
+                  >
+                    {genderDistributionData.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </main>
+        </>
+      )}
     </div>
   );
 };
