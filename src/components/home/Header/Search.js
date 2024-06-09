@@ -36,10 +36,10 @@ const Search = () => {
   }, []);
 
   return (
-    <div className="w-[100%]">
+    <div className="container mx-auto max-w-xl">
       <div className="flex items-center h-10 bg-amazonclone-yellow rounded">
         <input
-          className="flex grow items-center h-[100%] rounded-l text-black"
+          className="flex grow items-center h-[100%] rounded-l text-black p-3"
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}

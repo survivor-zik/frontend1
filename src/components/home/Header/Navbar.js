@@ -23,11 +23,14 @@ const NavBar = () => {
   };
   return (
     <header className="w-full items-center">
-      <div className="flex bg-primeColor text-white h-[60px]">
-        <div className="flex items-center m-4">
+      <div className="flex bg-primeColor text-white h-[80px]">
+        <div className="flex items-center md:m-4">
           <Link to={"/"}>
             <div>
-              <Image className="w-10 md:w-40 object-cover" imgSrc={logo} />
+              <Image
+                className="w-[120px] md:w-[220px] object-cover"
+                imgSrc={logo}
+              />
             </div>
           </Link>
         </div>
@@ -37,9 +40,10 @@ const NavBar = () => {
         <div className="flex items-center mx-2 md:m-4">
           {name.length > 0 ? (
             <Menu
+              className="hidden md:flex"
               menuButton={
                 <MenuButton>
-                  <div className="pr-4 pl-4">
+                  <div className="hidden md:flex px-4">
                     <div className="text-xs xl:text-sm">
                       Hello,
                       <br />
@@ -60,7 +64,7 @@ const NavBar = () => {
               </MenuItem>
             </Menu>
           ) : (
-            <div className="pr-4 pl-4">
+            <div className="px-4 hidden md:flex">
               <Link to="/signin">
                 <div className="text-xs xl:text-sm">
                   Hello,
