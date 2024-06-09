@@ -22,8 +22,8 @@ const NavBar = () => {
     navigate("/signin");
   };
   return (
-    <header className="w-full items-center">
-      <div className="flex bg-primeColor text-white h-[80px]">
+    <header className="w-full items-center sticky top-0 z-50">
+      <div className="flex bg-primeColor text-white h-[80px] relative">
         <div className="flex items-center md:m-4">
           <Link to={"/"}>
             <div>
