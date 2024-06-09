@@ -26,7 +26,7 @@ const Payment = () => {
         transition: Bounce,
       });
     } else {
-      navigate("/paymentgateway");
+      navigate("/placeorder");
     }
   }, [email, name, navigate, access_token]);
   useEffect(() => {
@@ -56,7 +56,7 @@ const Payment = () => {
   };
   return (
     <div className="max-w-container mx-auto px-4">
-      <Breadcrumbs title="Payment gateway" />
+      <Breadcrumbs title="Place Your Order" />
       <div className="pb-10 flex flex-col">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 ">
           <div>

@@ -7,6 +7,7 @@ import Badge from "./Badge";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/orebiSlice";
+import { Bounce, toast } from "react-toastify";
 
 const Product = (props) => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const Product = (props) => {
     });
   };
   const handleBuyNow = () => {
-    navigate("/paymentgateway");
+    navigate("/placeorder");
   };
   return (
     <div className="w-full relative group">
@@ -49,7 +50,7 @@ const Product = (props) => {
               </span>
             </li>
             <li
-              onClick={() =>
+              onClick={() => {
                 dispatch(
                   addToCart({
                     _id: props._id,
@@ -60,8 +61,11 @@ const Product = (props) => {
                     price: props.price,
                     colors: props.color,
                   })
-                )
-              }
+                );
+                toast.success("Product added to cart", {
+                  transition: Bounce,
+                });
+              }}
               className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full"
             >
               Add to Cart

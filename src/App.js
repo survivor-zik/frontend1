@@ -53,7 +53,7 @@ const router = createBrowserRouter(
         <Route path="/journal" element={<Journal />}></Route>
         <Route path="/product/:_id" element={<ProductDetails />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
-        <Route path="/paymentgateway" element={<Payment />}></Route>
+        <Route path="/placeorder" element={<Payment />}></Route>
       </Route>
     </Route>
   )

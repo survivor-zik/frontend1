@@ -40,7 +40,7 @@ const Cart = () => {
         transition: Bounce,
       });
     } else {
-      navigate("/paymentgateway");
+      navigate("/placeorder");
     }
   };
   return (

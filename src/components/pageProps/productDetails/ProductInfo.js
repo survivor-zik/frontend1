@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/orebiSlice";
+import { Bounce, toast } from "react-toastify";
 
 const ProductInfo = ({ productInfo }) => {
   console.log("Product Info ", productInfo);
@@ -15,7 +16,7 @@ const ProductInfo = ({ productInfo }) => {
         <span className="font-normal">Colors:</span> {productInfo.color}
       </p>
       <button
-        onClick={() =>
+        onClick={() => {
           dispatch(
             addToCart({
               _id: productInfo._id,
@@ -26,8 +27,11 @@ const ProductInfo = ({ productInfo }) => {
               price: productInfo.price,
               colors: productInfo.color,
             })
-          )
-        }
+          );
+          toast.success("Product added to cart", {
+            transition: Bounce,
+          });
+        }}
         className="w-full py-4 bg-primeColor hover:bg-black duration-300 text-white text-lg font-titleFont"
       >
         Add to Cart
