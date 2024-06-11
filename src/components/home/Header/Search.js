@@ -41,6 +41,7 @@ const Search = () => {
         <input
           className="flex grow items-center h-[100%] rounded-l text-black p-3"
           type="text"
+          placeholder="Search your products here"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
