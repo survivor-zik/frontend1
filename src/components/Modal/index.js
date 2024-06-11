@@ -13,6 +13,7 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     height: "70%",
+    width: "60%",
   },
 };
 const ModalComponent = ({ modalIsOpen, closeModal }) => {
@@ -38,7 +39,6 @@ const ModalComponent = ({ modalIsOpen, closeModal }) => {
     color: yup.string().required("Color is Required"),
   });
   const onSubmit = (values) => {
-    console.log("VALUES ADD-PRODUCT", values);
     if (pic) {
       uploadProduct(values, pic, token, closeModal, setUploading);
     } else {
@@ -58,127 +58,131 @@ const ModalComponent = ({ modalIsOpen, closeModal }) => {
         contentLabel="Add Product Modal"
         shouldCloseOnEsc={true}
       >
-        <h2 className="flex justify-center items-center text-2xl text-black">
-          Add Product
-        </h2>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={productSchema}
-          onSubmit={(values) => onSubmit(values)}
-        >
-          <Form className="flex flex-col py-8">
-            <div className="flex mx-5 items-center">
-              <label htmlFor="name" className="text-black w-[50%]">
-                Product Name
-              </label>
-              <Field
+        <div className="w-full h-full container mx-auto content-between flex flex-col justify-evenly">
+          <h2 className="flex justify-center items-center text-2xl text-black font-semibold">
+            Add Product
+          </h2>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={productSchema}
+            onSubmit={(values) => onSubmit(values)}
+          >
+            <Form className="flex flex-col py-4">
+              <div className="flex mx-5 items-center">
+                <label htmlFor="name" className="text-black w-[50%]">
+                  Product Name
+                </label>
+                <Field
+                  name="name"
+                  className="mt-2 rounded-lg border border-1 p-2 w-[50%] text-black"
+                  placeholder="Galaxy Watch"
+                />
+              </div>
+              <ErrorMessage
+                component="div"
                 name="name"
-                className="mt-2 rounded-lg border border-1 px-2 py-1 w-[50%]"
-                placeholder="Galaxy Watch"
+                className="mx-5 text-red-500"
               />
-            </div>
-            <ErrorMessage
-              component="div"
-              name="name"
-              className="mx-5 text-red-500"
-            />
-            <div className="flex mx-5 items-center">
-              <label htmlFor="price" className="text-black w-[50%]">
-                Product Price
-              </label>
-              <Field
+              <div className="flex mx-5 items-center">
+                <label htmlFor="price" className="text-black w-[50%]">
+                  Product Price
+                </label>
+                <Field
+                  name="price"
+                  className="mt-2 rounded-lg border border-1 p-2 w-[50%] text-black"
+                  placeholder="0"
+                  type="number"
+                />
+              </div>
+              <ErrorMessage
+                component="div"
                 name="price"
-                className="mt-2 rounded-lg border border-1 px-2 py-1 w-[50%]"
-                placeholder="0"
-                type="number"
+                className="mx-5 text-red-500"
               />
-            </div>
-            <ErrorMessage
-              component="div"
-              name="price"
-              className="mx-5 text-red-500"
-            />
-            <div className="flex mx-5 items-center">
-              <label htmlFor="category" className="text-black w-[50%]">
-                Product Category
-              </label>
-              <Field
+              <div className="flex mx-5 items-center">
+                <label htmlFor="category" className="text-black w-[50%]">
+                  Product Category
+                </label>
+                <Field
+                  name="category"
+                  className="mt-2 rounded-lg border border-1 p-2 w-[50%] text-black"
+                  placeholder="Watches"
+                />
+              </div>
+              <ErrorMessage
+                component="div"
                 name="category"
-                className="mt-2 rounded-lg border border-1 px-2 py-1 w-[50%]"
-                placeholder="Watches"
+                className="mx-5 text-red-500"
               />
-            </div>
-            <ErrorMessage
-              component="div"
-              name="category"
-              className="mx-5 text-red-500"
-            />
-            <div className="flex mx-5 items-center">
-              <label htmlFor="description" className="text-black w-[50%]">
-                Product Description
-              </label>
-              <Field
+              <div className="flex mx-5 items-center">
+                <label htmlFor="description" className="text-black w-[50%]">
+                  Product Description
+                </label>
+                <Field
+                  name="description"
+                  className="mt-2 rounded-lg border border-1 p-2 w-[50%] text-black"
+                  placeholder="Smart Watch"
+                />
+              </div>
+              <ErrorMessage
+                component="div"
                 name="description"
-                className="mt-2 rounded-lg border border-1 px-2 py-1 w-[50%]"
-                placeholder="Smart Watch"
+                className="mx-5 text-red-500"
               />
-            </div>
-            <ErrorMessage
-              component="div"
-              name="description"
-              className="mx-5 text-red-500"
-            />
-            <div className="flex mx-5 items-center">
-              <label htmlFor="color" className="text-black w-[50%]">
-                Product Color
-              </label>
-              <Field
+              <div className="flex mx-5 items-center">
+                <label htmlFor="color" className="text-black w-[50%]">
+                  Product Color
+                </label>
+                <Field
+                  name="color"
+                  className="mt-2 rounded-lg border border-1 p-2 w-[50%] text-black"
+                  placeholder="Blue with Black and White"
+                />
+              </div>
+              <ErrorMessage
+                component="div"
                 name="color"
-                className="mt-2 rounded-lg border border-1 px-2 py-1 w-[50%]"
-                placeholder="Blue with Black and White"
+                className="mx-5 text-red-500"
               />
-            </div>
-            <ErrorMessage
-              component="div"
-              name="color"
-              className="mx-5 text-red-500"
-            />
-            <div className="flex mx-5 items-center">
-              <label htmlFor="image" className="text-black w-[50%]">
-                Product Picture
-              </label>
-              <input
-                name="image"
-                className="mt-2 rounded-lg border border-1 px-2 py-1 w-[50%]"
-                type="file"
-                accept="image/*"
-                onChange={(event) => {
-                  setError(false);
-                  setPic(event.currentTarget.files[0]);
-                }}
-              />
-            </div>
-            {error && (
-              <div className="mx-5 text-red-500">Product Image is Required</div>
-            )}
-            <div className="flex justify-around items-center my-7">
-              <button
-                onClick={handleClose}
-                className="p-2 border border-1 border-[#DC143C] text-lg rounded-lg bg-[#DC143C] text-white font-semibold"
-                type="button"
-              >
-                Close
-              </button>
-              <button
-                className="p-2 border border-1 border-black text-lg rounded-lg bg-primeColor text-white font-semibold"
-                type="submit"
-                disabled={uploading}
-              >
-                {uploading ? "Uploading..." : "  Add Product"}
-              </button>
-            </div>
-          </Form>
-        </Formik>
+              <div className="flex mx-5 items-center">
+                <label htmlFor="image" className="text-black w-[50%]">
+                  Product Picture
+                </label>
+                <input
+                  name="image"
+                  className="mt-2 rounded-lg border border-1 p-2 w-[50%] text-black"
+                  type="file"
+                  accept="image/*"
+                  onChange={(event) => {
+                    setError(false);
+                    setPic(event.currentTarget.files[0]);
+                  }}
+                />
+              </div>
+              {error && (
+                <div className="mx-5 text-red-500">
+                  Product Image is Required
+                </div>
+              )}
+              <div className="flex justify-around items-center mt-10">
+                <button
+                  onClick={handleClose}
+                  className="p-2 border border-1 border-[#DC143C] text-lg rounded-lg bg-[#DC143C] hover:bg-red-700 hover:shadow-xl duration-300 transition-all text-white font-semibold"
+                  type="button"
+                >
+                  Close
+                </button>
+                <button
+                  className="p-2 border border-1 border-black text-lg rounded-lg bg-primeColor hover:bg-black hover:shadow-xl duration-300 transition-all text-white font-semibold"
+                  type="submit"
+                  disabled={uploading}
+                >
+                  {uploading ? "Uploading..." : "  Add Product"}
+                </button>
+              </div>
+            </Form>
+          </Formik>
+        </div>
       </Modal>
     </div>
   );

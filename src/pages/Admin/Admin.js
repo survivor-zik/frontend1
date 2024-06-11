@@ -23,14 +23,22 @@ import {
 } from "recharts";
 import { fetchData } from "./utils";
 import { InfinitySpin } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 
 const Admin = () => {
   const [totalProducts, setTotalProducts] = useState("0");
   const [totalUsers, setTotalUsers] = useState("0");
   const [totalPurchases, setTotalPurchases] = useState("0");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
-    fetchData(setTotalProducts, setTotalUsers, setTotalPurchases, setLoading);
+    fetchData(
+      setTotalProducts,
+      setTotalUsers,
+      setTotalPurchases,
+      setLoading,
+      navigate
+    );
   }, []);
   const customerPurchaseData = [
     { date: "2024-01-01", customers: 150, purchases: 220 },
@@ -81,27 +89,27 @@ const Admin = () => {
             <div className="main-title">
               <h3>DASHBOARD</h3>
             </div>
-            <div className="main-cards">
+            <div className="main-cards w-full container mx-auto">
               <div className="card">
                 <div className="card-inner">
                   <h3>Products</h3>
                   <BsFillArchiveFill className="card_icon" />
                 </div>
-                <h1>{totalProducts}</h1>
+                <h1>{loading ? "Loading..." : totalProducts}</h1>
               </div>
               <div className="card">
                 <div className="card-inner">
                   <h3>Purchases</h3>
                   <BsFillGrid3X3GapFill className="card_icon" />
                 </div>
-                <h1>{totalPurchases}</h1>
+                <h1>{loading ? "Loading..." : totalPurchases}</h1>
               </div>
               <div className="card">
                 <div className="card-inner">
                   <h3>Customers</h3>
                   <BsPeopleFill className="card_icon" />
                 </div>
-                <h1>{totalUsers}</h1>
+                <h1>{loading ? "Loading..." : totalUsers}</h1>
               </div>
             </div>
             <div className="charts">

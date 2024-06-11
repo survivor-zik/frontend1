@@ -5,7 +5,8 @@ export const fetchData = (
   setTotalProducts,
   setTotalUsers,
   setTotalPurchases,
-  setLoading
+  setLoading,
+  navigate
 ) => {
   setLoading(true);
   Promise.all([
@@ -14,10 +15,17 @@ export const fetchData = (
     getTotalPurchases(setTotalPurchases),
   ])
     .catch(() => {
+      console.log("Catch");
       setLoading(false);
+      localStorage.clear();
+      navigate("/");
+      toast.error("Please Login", {
+        transition: Bounce,
+      });
     })
     .finally(() => {
       setLoading(false);
+      console.log("Finally");
     });
 };
 const getTotalProducts = async (setTotalProducts) => {

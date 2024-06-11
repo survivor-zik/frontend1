@@ -14,15 +14,15 @@ const Products = () => {
   return (
     <div className="w-full pb-20">
       <AdminHeader />
-      <div className="flex px-2 py-4 justify-end">
+      <div className="flex px-2 py-4 justify-end w-full h-20 container mx-auto">
         <div
-          className="bg-primeColor w-[122px] h-[35px] text-white flex justify-center items-center text-base font-semibold hover:bg-black duration-300 cursor-pointer"
+          className="bg-primeColor px-3 py-1.5 rounded-lg text-white flex justify-center items-center text-base font-semibold hover:bg-black hover:shadow-xl duration-300 cursor-pointer"
           onClick={() => setOpenModal(true)}
         >
           + Add Product
         </div>
       </div>
-      <div className="w-full h-20 bg-[#F5F7F7] text-primeColor hidden lgl:grid grid-cols-6 place-content-center px-6 text-lg font-titleFont font-semibold">
+      <div className="w-full h-20 container mx-auto justify-center bg-[#F5F7F7] text-primeColor hidden lgl:grid grid-cols-6 place-content-center px-6 text-lg font-titleFont font-semibold">
         <h2 className="col-span-2">Product</h2>
         <h2>Price</h2>
         <h2>Category</h2>

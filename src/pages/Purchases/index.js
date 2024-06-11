@@ -13,7 +13,7 @@ const Purchases = () => {
   return (
     <div className="w-full pb-20">
       <AdminHeader />
-      <div className="w-full h-20 bg-[#F5F7F7] text-primeColor hidden lgl:grid grid-cols-7 place-content-center px-6 text-lg font-titleFont font-semibold">
+      <div className="w-full container mt-8 mx-auto h-20 bg-[#F5F7F7] text-primeColor hidden lgl:grid grid-cols-7 place-content-center px-6 text-lg font-titleFont font-semibold">
         <h2 className="col-span-2">Products</h2>
         <h2>Price</h2>
         <h2>Quantity</h2>
@@ -27,31 +27,13 @@ const Purchases = () => {
         ) : (
           userPurchases.map((userPurchase, index) => (
             <div key={index}>
-              <div className="w-full font-titleFont font-medium pb-5 px-5">
+              <div className="w-full container mx-auto font-titleFont font-medium pb-5 px-5">
                 <p>
                   Purchase by:{" "}
-                  <span className="font-semibold pl-2">
+                  <span className="font-semibold pl-2 text-black">
                     {userPurchase.user_id}
                   </span>
                 </p>
-                {/* <p>
-                  Purchase Date:
-                  <span className="font-semibold pl-2">
-                    {dateFormatter(userPurchase.purchase_date)}
-                  </span>
-                </p>
-                <p>
-                  Purchase Sub-Total: $
-                  <span className="font-semibold pl-2">
-                    {userPurchase.total_price}
-                  </span>
-                </p>
-                <p>
-                  Delivery Status:
-                  <span className="font-semibold pl-2">
-                    {userPurchase.status}
-                  </span>
-                </p> */}
               </div>
               {userPurchase.purchases.map((purchase) => (
                 <PurchaseCard purchase={purchase} key={purchase.product_id} />

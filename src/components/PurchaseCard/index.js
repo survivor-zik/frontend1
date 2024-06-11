@@ -13,7 +13,7 @@ const PurchaseCard = ({ purchase }) => {
     fetchItemDetails(purchase.product_id, setItemData);
   }, []);
   return (
-    <div className="w-full mb-4 border-2 px-4">
+    <div className="w-full mb-4 container mx-auto border rounded-xl p-2 items-center bg-[#FAF9F6] hover:shadow-xl transition-all duration-300">
       <div className="grid grid-cols-2 md:grid-cols-7 py-2">
         <div className="flex col-span-2 items-center gap-4">
           <img
@@ -24,29 +24,29 @@ const PurchaseCard = ({ purchase }) => {
           <h1 className="font-titleFont font-semibold">{itemData.name}</h1>
         </div>
         <div className="flex col-span-2 mdl:col-span-5 items-center justify-between py-4 mdl:py-0 px-4 mdl:px-0 gap-6 mdl:gap-0">
-          <div className="flex 1-1/4 items-center text-lg font-semibold">
+          <div className="flex w-1/4 products-center text-lg font-semibold">
             ${itemData.price}
           </div>
-          <div className="1-1/4 flex items-center gap-6 text-lg">
+          <div className="flex w-1/4 products-center text-lg font-semibold">
             <p>{purchase.quantity}</p>
           </div>
-          <div className="1-1/4 flex items-center font-titleFont font-bold text-lg">
+          <div className="flex w-1/4 products-center text-lg font-semibold">
             <p>${purchase.quantity * itemData.price}</p>
           </div>
-          <div className="1-1/4 flex items-center font-titleFont font-bold">
+          <div className="flex w-1/4 products-center text-lg font-semibold">
             <p>{purchase.status}</p>
           </div>
           <div className="w-1/4">
-            <div className="flex flex-col justify-start">
+            <div className="flex flex-col justify-start w-[50%]">
               <button
-                className="px-2 py-3 mb-2 rounded-lg bg-primeColor text-white"
+                className="px-2 py-3 mb-2 rounded-lg bg-primeColor text-white hover:bg-black"
                 onClick={() => setShowModal(true)}
                 disabled={deleting}
               >
                 Edit
               </button>
               <button
-                className="px-2 py-3 rounded-lg bg-red-500 text-white"
+                className="px-2 py-3 rounded-lg bg-red-500 text-white hover:bg-red-700 transition-all duration-300"
                 onClick={() => deletePurchase(purchase._id, token, setDeleting)}
                 disabled={deleting}
               >
@@ -59,7 +59,7 @@ const PurchaseCard = ({ purchase }) => {
       <div>
         <p>
           Purchase Date:{" "}
-          <span className="flex-col items-center font-titleFont font-semibold">
+          <span className="flex-col items-center font-titleFont font-semibold text-black">
             {dateFormatter(purchase.purchase_date)}
           </span>
         </p>
