@@ -52,6 +52,11 @@ export const adminNavBarList = [
     title: "Purchases",
     link: "/admin/purchases",
   },
+  {
+    _id: 2003,
+    title: "Users",
+    link: "/admin/users",
+  },
 ];
 // =================== NavBarList End here ======================
 // =================== Special Offer data Start here ============

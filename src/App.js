@@ -23,6 +23,7 @@ import Products from "./pages/Products";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import Purchases from "./pages/Purchases";
 import NavBar from "./components/home/Header/Navbar";
+import Users from "./pages/Users";
 const Layout = () => {
   return (
     <div>
@@ -44,6 +45,7 @@ const router = createBrowserRouter(
         <Route path="/admin/" element={<Admin />}></Route>
         <Route path="/admin/products" element={<Products />}></Route>
         <Route path="/admin/purchases" element={<Purchases />}></Route>
+        <Route path="/admin/users" element={<Users />}></Route>
       </Route>
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<Home />}></Route>
