@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Bounce, toast } from "react-toastify";
 
-export const getUsers = (setUsers, setLoading) => {
+export const getUsers = (setUsers, setLoading, navigate) => {
   setLoading(true);
   axios
     .get("https://mathematical-lavinia-survivor.koyeb.app/users/", {
@@ -24,5 +24,7 @@ export const getUsers = (setUsers, setLoading) => {
       toast.error("Error while fetching Users", {
         transition: Bounce,
       });
+      localStorage.clear();
+      navigate("/signin");
     });
 };

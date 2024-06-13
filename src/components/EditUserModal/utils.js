@@ -1,14 +1,15 @@
 import axios from "axios";
 import { Bounce, toast } from "react-toastify";
 
-export const updateUser = (email, setUpdating, status) => {
+export const updateUser = (user, setUpdating, status) => {
   setUpdating(true);
   const data = {
-    status,
+    ...user,
+    role: status,
   };
   axios
     .put(
-      `https://mathematical-lavinia-survivor.koyeb.app/users/${email}`,
+      `https://mathematical-lavinia-survivor.koyeb.app/users/${user.email}`,
       data,
       {
         headers: {

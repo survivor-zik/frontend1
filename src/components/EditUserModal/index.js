@@ -15,7 +15,7 @@ const customStyles = {
   },
 };
 const EditUserModal = ({ userDetails, modalIsOpen, closeModal }) => {
-  const options = ["admin", "user"];
+  const options = ["Admin", "User"];
   const [updating, setUpdating] = useState(false);
   const [status, setStatus] = useState(userDetails.role);
   const onOptionChangeHandler = (event) => {
@@ -89,7 +89,7 @@ const EditUserModal = ({ userDetails, modalIsOpen, closeModal }) => {
             <button
               className="p-2 border border-1 border-black text-lg rounded-lg bg-primeColor hover:bg-black hover:shadow-xl duration-300 transition-all text-white font-semibold"
               disabled={updating}
-              onClick={() => updateUser(userDetails.email, setUpdating, status)}
+              onClick={() => updateUser(userDetails, setUpdating, status)}
             >
               {updating ? "Updating..." : "  Update Product"}
             </button>

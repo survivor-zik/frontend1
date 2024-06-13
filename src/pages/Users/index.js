@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { getUsers } from "./utils";
 import AdminHeader from "../../components/AdminLayout/AdminHeader";
 import UsersCard from "../../components/UsersCard";
+import { useNavigate } from "react-router-dom";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
-    getUsers(setUsers, setLoading);
+    getUsers(setUsers, setLoading, navigate);
   }, []);
   return (
     <div className="w-full pb-20">
