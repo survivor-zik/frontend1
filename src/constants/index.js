@@ -57,6 +57,11 @@ export const adminNavBarList = [
     title: "Users",
     link: "/admin/users",
   },
+  {
+    _id: 2004,
+    title: "Logout",
+    link: "/",
+  },
 ];
 // =================== NavBarList End here ======================
 // =================== Special Offer data Start here ============

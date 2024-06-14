@@ -7,11 +7,14 @@ import Image from "../../designLayouts/Image";
 import { logo, logoLight } from "../../../assets/images";
 import { adminNavBarList } from "../../../constants";
 import { HiMenuAlt2 } from "react-icons/hi";
+import { useDispatch } from "react-redux";
+import { resetData } from "../../../redux/orebiSlice";
 
 const AdminHeader = () => {
   const [showMenu, setShowMenu] = useState(true);
   const [sidenav, setSidenav] = useState(false);
   const location = useLocation();
+  const dispatch = useDispatch();
   useEffect(() => {
     let ResponsiveMenu = () => {
       if (window.innerWidth < 667) {
@@ -23,6 +26,12 @@ const AdminHeader = () => {
     ResponsiveMenu();
     window.addEventListener("resize", ResponsiveMenu);
   }, []);
+  const handleLogout = (title) => {
+    if (title === "Logout") {
+      localStorage.clear();
+      dispatch(resetData());
+    }
+  };
 
   return (
     <div className="w-full h-20 bg-primeColor sticky top-0 z-50 border-b-[1px] border-b-gray-200">
@@ -51,6 +60,7 @@ const AdminHeader = () => {
                       className="flex font-normal hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-[#F9F6EE] hover:underline underline-offset-[4px] decoration-[1px] hover:text-white md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
                       to={link}
                       state={{ data: location.pathname.split("/")[1] }}
+                      onClick={(title) => handleLogout(title)}
                     >
                       <li>{title}</li>
                     </NavLink>
