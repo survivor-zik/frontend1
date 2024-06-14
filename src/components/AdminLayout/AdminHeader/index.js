@@ -28,7 +28,7 @@ const AdminHeader = () => {
     <div className="w-full h-20 bg-primeColor sticky top-0 z-50 border-b-[1px] border-b-gray-200">
       <nav className="h-full px-4 max-w-container mx-auto relative">
         <Flex className="flex items-center justify-between h-full">
-          <Link to="/">
+          <Link to="/admin">
             <div>
               <Image
                 className="w-[120px] md:w-[220px] object-cover"

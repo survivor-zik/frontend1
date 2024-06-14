@@ -17,7 +17,7 @@ const PurchaseCard = ({ purchase }) => {
       <div className="grid grid-cols-2 md:grid-cols-7 py-2">
         <div className="flex col-span-2 items-center gap-4">
           <img
-            className="w-32 h-32"
+            className="w-32 h-32 rounded-xl"
             src={`https://mathematical-lavinia-survivor.koyeb.app/products/image/${itemData.iden}`}
             alt="productImage"
           />
