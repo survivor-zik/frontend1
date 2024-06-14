@@ -22,28 +22,28 @@ const NavBar = () => {
     navigate("/signin");
   };
   return (
-    <header className="w-full items-center sticky top-0 z-50">
-      <div className="flex bg-primeColor text-white h-[80px] relative">
+    <header className="w-full items-center sticky top-0 z-50 bg-primeColor">
+      <div className="flex bg-primeColor text-white h-[60px] md:h-[80px] relative justify-between">
         <div className="flex items-center md:m-4">
           <Link to={"/"}>
             <div>
               <Image
-                className="w-[120px] md:w-[220px] object-cover"
+                className="w-[80px] md:w-[220px] object-cover"
                 imgSrc={logo}
               />
             </div>
           </Link>
         </div>
-        <div className="flex grow relative items-center">
+        <div className=" hidden md:flex grow relative items-center">
           <Search />
         </div>
         <div className="flex items-center mx-2 md:m-4">
           {name.length > 0 ? (
             <Menu
-              className="hidden md:flex"
+              className="flex"
               menuButton={
                 <MenuButton>
-                  <div className="hidden md:flex px-4">
+                  <div className="flex px-4">
                     <div className="text-xs xl:text-sm">
                       Hello,
                       <br />
@@ -86,6 +86,9 @@ const NavBar = () => {
             </div>
           </Link>
         </div>
+      </div>
+      <div className="flex md:hidden grow relative items-center pb-2">
+        <Search />
       </div>
     </header>
   );
