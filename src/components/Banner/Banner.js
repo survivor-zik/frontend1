@@ -100,7 +100,7 @@ const Banner = () => {
     ],
   };
   return (
-    <div className="w-full bg-white">
+    <div className="w-full bg-white pt-2">
       <Slider {...settings}>
         <Link to="/shop">
           <div>
