@@ -15,6 +15,8 @@ const Payment = () => {
   const [shippingCharge, setShippingCharge] = useState("");
   const [address, setAddress] = useState("");
   const [contact, setContact] = useState("");
+  const [city, setCity] = useState("");
+  const [zipCode, setZipCode] = useState();
   const [err, setErr] = useState("");
   useEffect(() => {
     console.log(access_token);
@@ -76,7 +78,7 @@ const Payment = () => {
               placeholder="Enter number to contact"
             />
           </div>
-          <div className="border-[1px] border-gray-400 text-lg px-4 font-medium flex">
+          <div className="border-[1px] border-gray-400 border-b-0 text-lg px-4 font-medium flex">
             <p className="w-[50%] py-1.5">Address: </p>
             <input
               onChange={handleAddress}
@@ -84,6 +86,27 @@ const Payment = () => {
               className="w-[50%] py-1.5 bg-[#f8f8f8] pl-2 border-l-[1px] border-gray-400 placeholder:text-sm placeholder:tracking-wide text-base placeholder:font-normal outline-none font-semibold tracking-wide"
               type="text"
               placeholder="Enter delivery address here."
+            />
+          </div>
+          <div className="border-[1px] border-gray-400 border-b-0 text-lg px-4 font-medium flex">
+            <p className="w-[50%] py-1.5">City: </p>
+            <input
+              onChange={(e) => setCity(e.target.value)}
+              value={city}
+              className="w-[50%] py-1.5 bg-[#f8f8f8] pl-2 border-l-[1px] border-gray-400 placeholder:text-sm placeholder:tracking-wide text-base placeholder:font-normal outline-none font-semibold tracking-wide"
+              type="text"
+              placeholder="Enter City here."
+            />
+          </div>
+          <div className="border-[1px] border-gray-400 text-lg px-4 font-medium flex">
+            <p className="w-[50%] py-1.5">Zip Code: </p>
+            <input
+              onChange={(e) => setZipCode(e.target.value)}
+              value={zipCode}
+              className="w-[50%] py-1.5 bg-[#f8f8f8] pl-2 border-l-[1px] border-gray-400 placeholder:text-sm placeholder:tracking-wide text-base placeholder:font-normal outline-none font-semibold tracking-wide appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              type="number"
+              inputMode="numeric"
+              placeholder="Enter Zip Code here."
             />
           </div>
           {err && <div className="text-red-600 font-semibold">{err}</div>}
@@ -123,6 +146,8 @@ const Payment = () => {
           onClick={() => {
             uploadPurchase(
               address,
+              city,
+              zipCode.toString(),
               contact,
               products,
               totalAmt + shippingCharge,

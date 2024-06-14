@@ -4,6 +4,8 @@ import { resetCart } from "../../redux/orebiSlice";
 
 export const uploadPurchase = (
   address,
+  city,
+  zipCode,
   contact,
   products,
   totalAmount,
@@ -19,11 +21,19 @@ export const uploadPurchase = (
     setErr("Please enter a valid address");
     return;
   }
+  if (!zipCode) {
+    setErr("Please enter a valid Zip Code");
+    return;
+  }
+  if (!city) {
+    setErr("Please enter a valid City");
+    return;
+  }
   const payload = {
     items: transformObjectsToItems(products),
     total_price: totalAmount,
     status: "pending",
-    address,
+    address: address + ", " + city + ", " + zipCode,
     contact,
   };
   console.log("payload", payload);
