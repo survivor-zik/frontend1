@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   userInfo: [],
@@ -9,7 +10,15 @@ const initialState = {
   email: "",
   items: [],
 };
-
+export const fetchProducts = createAsyncThunk(
+  "products/fetchProducts",
+  async () => {
+    const response = await axios.get(
+      "https://mathematical-lavinia-survivor.koyeb.app/products/"
+    );
+    return response.data;
+  }
+);
 export const orebiSlice = createSlice({
   name: "orebi",
   initialState,
@@ -66,6 +75,20 @@ export const orebiSlice = createSlice({
     resetData: (state) => {
       return initialState;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProducts.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.items = action.payload;
+      })
+      .addCase(fetchProducts.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
   },
 });
 

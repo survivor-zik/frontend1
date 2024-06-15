@@ -1,45 +1,46 @@
 import { useState, useEffect } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
-// import { callAPI } from "../utils/CallApi";
+import { useSelector } from "react-redux";
 
 const Search = () => {
-  const [suggestions, setSuggestions] = useState(null);
+  const [suggestions, setSuggestions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("All");
   const navigate = useNavigate();
-
-  const onHandleSubmit = (e) => {
-    e.preventDefault();
-
-    navigate({
-      pathname: "search",
-      search: `${createSearchParams({
-        category: `${category}`,
-        searchTerm: `${searchTerm}`,
-      })}`,
-    });
-
-    setSearchTerm("");
-    setCategory("All");
-  };
-
-  //   const getSuggestions = () => {
-  //     callAPI(`data/suggestions.json`).then((suggestionResults) => {
-  //       setSuggestions(suggestionResults);
-  //     });
-  //   };
+  const { items } = useSelector((state) => state.orebiReducer);
 
   useEffect(() => {
-    // getSuggestions();
-    setSuggestions(["Home", "Clock"]);
-  }, []);
+    setSuggestions(items);
+  }, [items]);
+  const idString = (_id) => {
+    return String(_id).toLowerCase().split(" ").join("");
+  };
+  const onHandleSubmit = (e) => {
+    e.preventDefault();
+    if (searchTerm) {
+      const product = items.find(
+        (item) => item.name.toLowerCase() === searchTerm.toLowerCase()
+      );
+      if (product) {
+        console.log("search", product);
+        const rootId = idString(product.name);
+        navigate(`/product/${rootId}`, { state: { item: product } });
+      }
+      setSearchTerm("");
+      setCategory("All");
+    }
+  };
+
+  const filteredProducts = suggestions.filter((product) =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <div className="container mx-auto max-w-xl">
+    <div className="container mx-auto max-w-xl relative">
       <div className="flex items-center h-10 bg-amazonclone-yellow rounded">
         <input
-          className="flex grow items-center h-[100%] rounded-l text-black p-3"
+          className="flex grow items-center h-full rounded-l text-black p-3"
           type="text"
           placeholder="Search your products here"
           value={searchTerm}
@@ -49,29 +50,19 @@ const Search = () => {
           <FaSearch className="h-[27px] m-auto stroke-slate-900" />
         </button>
       </div>
-      {/* {suggestions && (
-        <div className="bg-white text-black w-full z-40 absolute">
-          {suggestions
-            .filter((suggestion) => {
-              const currentSearchTerm = searchTerm.toLowerCase();
-              const title = suggestion.title.toLowerCase();
-              return (
-                currentSearchTerm &&
-                title.startsWith(currentSearchTerm) &&
-                title !== currentSearchTerm
-              );
-            })
-            .slice(0, 10)
-            .map((suggestion) => (
-              <div
-                key={suggestion.id}
-                onClick={() => setSearchTerm(suggestion.title)}
-              >
-                {suggestion.title}
-              </div>
-            ))}
+      {searchTerm && (
+        <div className="bg-white text-black w-[calc(100%-45px)] z-40 absolute">
+          {filteredProducts.slice(0, 10).map((product) => (
+            <div
+              key={product.id}
+              className="p-2 hover:bg-gray-200 cursor-pointer"
+              onClick={() => setSearchTerm(product.name)}
+            >
+              {product.name}
+            </div>
+          ))}
         </div>
-      )} */}
+      )}
     </div>
   );
 };
