@@ -40,14 +40,8 @@ const Payment = () => {
     setTotalAmt(price);
   }, [products]);
   useEffect(() => {
-    if (totalAmt <= 200) {
-      setShippingCharge(30);
-    } else if (totalAmt <= 400) {
-      setShippingCharge(25);
-    } else if (totalAmt > 401) {
-      setShippingCharge(20);
-    }
-  }, [totalAmt]);
+    setShippingCharge(200);
+  }, []);
   const handleAddress = (e) => {
     setAddress(e.target.value);
     setErr("");
