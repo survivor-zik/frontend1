@@ -69,7 +69,7 @@ const EditPurchaseModal = ({ purchase, modalIsOpen, closeModal }) => {
             <div className="justify-between flex items-center w-full py-2">
               <p>Purchase Price:</p>
               <span className="text-black border rounded-xl py-2 w-[50%] justify-center flex cursor-not-allowed">
-                ${purchase.total_price}
+                PKR {purchase.total_price}
               </span>
             </div>
             <div className="justify-between flex items-center w-full py-2">
