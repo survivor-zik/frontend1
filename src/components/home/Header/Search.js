@@ -25,7 +25,16 @@ const Search = () => {
       if (product) {
         console.log("search", product);
         const rootId = idString(product.name);
-        navigate(`/product/${rootId}`, { state: { item: product } });
+        let item = {
+          _id: product.iden,
+          img: `https://mathematical-lavinia-survivor.koyeb.app/products/image/${product.iden}`,
+          productName: product.name,
+          price: product.price,
+          color: product.colors,
+          des: product.description,
+          category: product.categories,
+        };
+        navigate(`/product/${rootId}`, { state: { item: item } });
       }
       setSearchTerm("");
       setCategory("All");
