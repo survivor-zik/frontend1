@@ -35,6 +35,7 @@ export const uploadPurchase = (
     status: "pending",
     address: address + ", " + city + ", " + zipCode,
     contact,
+    purchase_date: new Date(),
   };
   console.log("payload", payload);
   axios

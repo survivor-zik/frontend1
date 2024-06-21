@@ -25,13 +25,13 @@ const PurchaseCard = ({ purchase }) => {
         </div>
         <div className="flex col-span-2 mdl:col-span-5 items-center justify-between py-4 mdl:py-0 px-4 mdl:px-0 gap-6 mdl:gap-0">
           <div className="flex w-1/4 products-center text-lg font-semibold">
-            ${itemData.price}
+            PKR {itemData.price}
           </div>
           <div className="flex w-1/4 products-center text-lg font-semibold">
             <p>{purchase.quantity}</p>
           </div>
           <div className="flex w-1/4 products-center text-lg font-semibold">
-            <p>${purchase.quantity * itemData.price}</p>
+            <p>PKR {purchase.quantity * itemData.price}</p>
           </div>
           <div className="flex w-1/4 products-center text-lg font-semibold">
             <p>{purchase.status}</p>

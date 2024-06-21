@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
       </div>
       <div className="col-span-4 md:col-span-4 flex items-center justify-between py-4 mdl:py-0 px-4 mdl:px-0 gap-6 mdl:gap-0">
         <div className="flex w-1/4 products-center text-lg font-semibold">
-          ${product.price}
+          PKR {product.price}
         </div>
         <div className="w-1/4 flex products-center gap-6 text-lg">
           <p>{product.categories}</p>
