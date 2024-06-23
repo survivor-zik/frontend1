@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { dateFormatter } from "../../utils";
 import EditPurchaseModal from "../EditPurchaseModal";
 
-const PurchaseCard = ({ purchase }) => {
+const PurchaseCard = ({ purchase, data }) => {
   const [itemData, setItemData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [deleting, setDeleting] = useState(false);
@@ -47,7 +47,7 @@ const PurchaseCard = ({ purchase }) => {
               </button>
               <button
                 className="px-2 py-3 rounded-lg bg-red-500 text-white hover:bg-red-700 transition-all duration-300"
-                onClick={() => deletePurchase(purchase._id, token, setDeleting)}
+                onClick={() => deletePurchase(data._id, token, setDeleting)}
                 disabled={deleting}
               >
                 {deleting ? "Deleting..." : "Delete"}
@@ -60,14 +60,15 @@ const PurchaseCard = ({ purchase }) => {
         <p>
           Purchase Date:{" "}
           <span className="flex-col items-center font-titleFont font-semibold text-black">
-            {dateFormatter(purchase.purchase_date)}
+            {dateFormatter(data.purchase_date)}
           </span>
         </p>
       </div>
       <EditPurchaseModal
         closeModal={setShowModal}
         modalIsOpen={showModal}
-        purchase={purchase}
+        purchase={data}
+        quantity={purchase.quantity}
       />
     </div>
   );

@@ -15,7 +15,7 @@ const customStyles = {
     width: "50%",
   },
 };
-const EditPurchaseModal = ({ purchase, modalIsOpen, closeModal }) => {
+const EditPurchaseModal = ({ purchase, modalIsOpen, closeModal, quantity }) => {
   const token = localStorage.getItem("token");
   const [updating, setUpdating] = useState(false);
   const [status, setStatus] = useState(purchase.status);
@@ -63,7 +63,7 @@ const EditPurchaseModal = ({ purchase, modalIsOpen, closeModal }) => {
             <div className="justify-between flex items-center w-full py-2">
               <p>Product Quantity:</p>
               <span className="text-black border rounded-xl py-2 w-[50%] justify-center flex cursor-not-allowed">
-                {purchase.quantity}
+                {quantity}
               </span>
             </div>
             <div className="justify-between flex items-center w-full py-2">

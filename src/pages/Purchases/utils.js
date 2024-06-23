@@ -10,10 +10,13 @@ export const getPurchases = async (token, setPurchases, setLoading) => {
       },
     })
     .then((response) => {
-      console.log("getPurchases Response", response.data);
       setLoading(false);
       if (response.status === 200) {
-        setPurchases(refactorPurchases(response.data));
+        const sortedData = [...response.data].sort(
+          (a, b) => new Date(b.purchase_date) - new Date(a.purchase_date)
+        );
+        console.log("Admin Purchases", sortedData);
+        setPurchases(sortedData);
       } else {
         setPurchases([]);
       }

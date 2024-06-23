@@ -35,8 +35,12 @@ const Purchases = () => {
                   </span>
                 </p>
               </div>
-              {userPurchase.purchases.map((purchase) => (
-                <PurchaseCard purchase={purchase} key={purchase.product_id} />
+              {userPurchase.items.map((purchase) => (
+                <PurchaseCard
+                  purchase={purchase}
+                  key={purchase.product_id}
+                  data={userPurchase}
+                />
               ))}
             </div>
           ))

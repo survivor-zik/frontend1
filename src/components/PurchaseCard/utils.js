@@ -9,7 +9,6 @@ export const fetchItemDetails = (id, setItemData) => {
       },
     })
     .then((response) => {
-      console.log("get single Purchases Response", response.data);
       if (response.status === 200) {
         setItemData(response.data);
       } else {
@@ -31,7 +30,6 @@ export const deletePurchase = (id, token, setDeleting) => {
       },
     })
     .then((response) => {
-      console.log("delete Purchase", response.data);
       toast.success("Purchase deleted successfully", {
         transition: Bounce,
       });
