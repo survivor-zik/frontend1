@@ -36,7 +36,7 @@ const PurchaseCard = ({ purchase, data }) => {
           <div className="flex w-1/4 products-center text-lg font-semibold">
             <p>{purchase.status}</p>
           </div>
-          <div className="w-1/4">
+          <div className="hidden md:block w-1/4">
             <div className="flex flex-col justify-start w-[50%]">
               <button
                 className="px-2 py-3 mb-2 rounded-lg bg-primeColor text-white hover:bg-black"
@@ -53,6 +53,24 @@ const PurchaseCard = ({ purchase, data }) => {
                 {deleting ? "Deleting..." : "Delete"}
               </button>
             </div>
+          </div>
+        </div>
+        <div className="flex md:hidden col-span-2">
+          <div className="flex flex-col justify-start w-full">
+            <button
+              className="px-2 py-3 mb-2 rounded-lg bg-primeColor text-white hover:bg-black"
+              onClick={() => setShowModal(true)}
+              disabled={deleting}
+            >
+              Edit
+            </button>
+            <button
+              className="px-2 py-3 rounded-lg bg-red-500 text-white hover:bg-red-700 transition-all duration-300"
+              onClick={() => deletePurchase(data._id, token, setDeleting)}
+              disabled={deleting}
+            >
+              {deleting ? "Deleting..." : "Delete"}
+            </button>
           </div>
         </div>
       </div>
