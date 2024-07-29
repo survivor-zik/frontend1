@@ -10,6 +10,7 @@ const PurchaseCard = ({ purchase, data }) => {
   const [deleting, setDeleting] = useState(false);
   const token = localStorage.getItem("token");
   useEffect(() => {
+    console.log(purchase, "shubair", data);
     fetchItemDetails(purchase.product_id, setItemData);
   }, []);
   return (
@@ -34,7 +35,7 @@ const PurchaseCard = ({ purchase, data }) => {
             <p>PKR {purchase.quantity * itemData.price}</p>
           </div>
           <div className="flex w-1/4 products-center text-lg font-semibold">
-            <p>{purchase.status}</p>
+            <p>{data.status}</p>
           </div>
           <div className="hidden md:block w-1/4">
             <div className="flex flex-col justify-start w-[50%]">
